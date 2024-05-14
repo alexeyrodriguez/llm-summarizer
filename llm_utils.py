@@ -49,6 +49,10 @@ Context:
 
         summ_prompt = summary_spec.summary_prompt
         summ_prompt += "\n\nContext:\n"
+
+        if summary_spec.max_pages is not None:
+            res = res[:summary_spec.max_pages]
+
         for page_num, response in enumerate(res):
             summ_prompt += f"Page {page_num}:\n{response}\n\n"
 
