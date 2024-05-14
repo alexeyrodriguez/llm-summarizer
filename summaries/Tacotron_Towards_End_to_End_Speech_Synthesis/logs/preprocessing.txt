@@ -1,0 +1,36 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 1:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 2:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 3:
+The data preprocessing steps for training involved spectral analysis pre-emphasis of 0.97, a frame length of 50 ms, a frame shift of 12.5 ms, and the use of a Hann window type.
+
+Page 4:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 5:
+The data preprocessing for training in the paper involved using a vanilla seq2seq model with 2 layers of residual RNNs, each layer having 256 GRU cells. No pre-net or post-processing net was used, and the decoder directly predicted linear-scale log magnitude spectrogram. Scheduled sampling with a sampling rate of 0.5 was required for the model to learn alignments and generalize.
+
+Page 6:
+The text related to how the data was preprocessed for training is as follows: "We trained a model without the post-processing net while keeping all the other components untouched (except that the decoder RNN predicts linear-scale spectrogram)."
+
+Page 7:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 8:
+I'm sorry, but the specific information related to how the data was preprocessed for training is not available in the provided context from the machine learning paper.
+
+Page 9:
+I'm sorry, but the context you provided does not contain information related to how the data was preprocessed for training in the machine learning paper.
+

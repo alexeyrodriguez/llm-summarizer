@@ -1,0 +1,9 @@
+The paper titled "Tacotron: Towards End-to-End Speech Synthesis" presents an end-to-end generative text-to-speech model called Tacotron. The traditional text-to-speech synthesis systems involve multiple stages and require domain expertise, making them complex and laborious to design. In contrast, Tacotron synthesizes speech directly from characters and can be trained from scratch with random initialization using <text, audio> pairs.
+
+Key techniques are introduced to enhance the sequence-to-sequence framework for this challenging task. Tacotron achieves a high subjective mean opinion score of 3.82 on US English, surpassing a production parametric system in terms of naturalness. The model is faster than sample-level autoregressive methods as it generates speech at the frame level.
+
+The architecture of Tacotron includes components like the CBHG module for feature extraction, an encoder for text representation, an attention-based decoder, and a post-processing network for converting spectrograms to waveforms. The model's design choices, such as using residual connections and multiple output frames at each decoder step, contribute to its performance.
+
+Comparative studies with vanilla seq2seq models and models with different encoders demonstrate the effectiveness of Tacotron's design. Mean opinion score tests show that Tacotron outperforms existing systems in terms of naturalness. The paper also discusses future directions for improving the model, such as enhancing the waveform synthesis process.
+
+Overall, Tacotron presents a promising approach to text-to-speech synthesis by simplifying the system architecture, achieving high naturalness in speech synthesis, and offering faster inference compared to traditional methods.

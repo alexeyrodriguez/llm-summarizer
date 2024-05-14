@@ -1,0 +1,9 @@
+Based on the information provided in the context, the data preprocessing for training in the machine learning paper varied across different sections. Here is an overall summary of the preprocessing steps mentioned:
+
+1. Page 3: Spectral analysis pre-emphasis of 0.97, frame length of 50 ms, frame shift of 12.5 ms, and the use of a Hann window type were involved in the preprocessing.
+
+2. Page 5: Preprocessing included using a vanilla seq2seq model with 2 layers of residual RNNs, each layer having 256 GRU cells. No pre-net or post-processing net was used, and the decoder directly predicted linear-scale log magnitude spectrogram. Scheduled sampling with a sampling rate of 0.5 was implemented for the model to learn alignments and generalize.
+
+3. Page 6: A model was trained without the post-processing net while keeping all other components untouched, except that the decoder RNN predicted linear-scale spectrogram.
+
+Overall, the data preprocessing for training in the machine learning paper involved spectral analysis, frame settings, specific neural network architectures, and scheduled sampling techniques to enhance the model's learning and generalization capabilities.

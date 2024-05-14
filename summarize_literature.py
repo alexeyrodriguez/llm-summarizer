@@ -50,5 +50,5 @@ def summarize_paper(client: OpenAIClient, summary_spec: SummarySpec, paper: Pape
 client = OpenAIClient()
 papers = load_papers()
 for paper in papers[:1]:
-    for spec in all_specs[:1]:
+    for spec in all_specs:
         summarize_paper(client, spec, paper)

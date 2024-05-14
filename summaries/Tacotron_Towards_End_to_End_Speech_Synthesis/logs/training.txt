@@ -1,0 +1,42 @@
+
+Please consider the details for neural network training provided in the context below
+and provide an overall summary for the training procedure and hyperparameters.
+
+
+Context:
+Page 0:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 1:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 2:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 3:
+The paper provides the following information related to how the neural network was trained:
+
+- Hyper-parameters and network architectures were specified in Table 1.
+- The encoder and decoder pre-net structures were described.
+- The decoder utilized a content-based tanh attention mechanism.
+- The decoder target was set as an 80-band mel-scale spectrogram.
+- Multiple, non-overlapping output frames were predicted at each decoder step to increase convergence speed.
+
+Page 4:
+The paper provides details on the training process of the neural network, including the batch size, learning rate, number of epochs, and losses. The model was trained using a batch size of 32, with an Adam optimizer starting from a learning rate of 0.001 and decaying to 0.0005, 0.0003, and 0.0001 after 500K, 1M, and 2M global steps, respectively. The training utilized a simple ℓ1 loss for both the seq2seq decoder and post-processing net, with equal weights assigned to the two losses.
+
+Page 5:
+The neural network was trained with a vanilla seq2seq model using 2 layers of residual RNNs, each layer having 256 GRU cells. Scheduled sampling with a sampling rate of 0.5 was required for the model to learn alignments and generalize.
+
+Page 6:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 7:
+The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+
+Page 8:
+The paper does not contain specific information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+
+Page 9:
+I'm sorry, but the context provided does not contain the specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+

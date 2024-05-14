@@ -1,0 +1,36 @@
+
+Please consider the details for the dataset used in the neural network training provided in the context below
+and provide an overall summary for the dataset used.
+
+
+Context:
+Page 0:
+The paper does not mention the specific dataset used to train the neural network for the Tacotron model.
+
+Page 1:
+The paper does not explicitly mention the dataset used to train the neural network.
+
+Page 2:
+The paper does not provide information about the dataset used to train the neural network.
+
+Page 3:
+The paper does not provide information about the specific dataset used to train the neural network.
+
+Page 4:
+The dataset used to train the neural network in the machine learning paper is an internal North American English dataset, which contains about 24.6 hours of speech data spoken by a professional female speaker.
+
+Page 5:
+The dataset used to train the neural network in the paper was not explicitly mentioned in the provided context.
+
+Page 6:
+The paper does not provide information about the dataset used to train the neural network.
+
+Page 7:
+The paper does not explicitly mention the dataset used to train the neural network.
+
+Page 8:
+The paper does not provide information about the dataset used to train the neural network.
+
+Page 9:
+The context provided does not contain information about the dataset used to train the neural network in the paper.
+
