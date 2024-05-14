@@ -1,0 +1,9 @@
+Based on the information provided in the context, the data preprocessing for training in the paper involved two main steps:
+
+1. Computing acoustic tokens using SoundStream: This process utilized a neural audio codec to generate embeddings at a reduced sampling rate. SoundStream employed a convolutional encoder with a residual vector quantizer to produce acoustic tokens.
+
+2. Generating semantic tokens using w2v-BERT: A self-supervised audio representation model, w2v-BERT, was used to create semantic tokens. This model utilized a Conformer-based architecture with k-means clustering on intermediate layer embeddings to generate the semantic tokens.
+
+Additionally, on page 5, it is mentioned that w2v-BERT XL was used with specific heuristics to choose the intermediate layer for quantization and the number of k-means clusters. The best configuration identified was using the 7th layer in the MLM module of w2v-BERT XL with 1024 clusters.
+
+Overall, the data preprocessing for training in the paper involved both acoustic and semantic token generation using specialized models and techniques to prepare the data for further processing and model training.

@@ -1,0 +1,7 @@
+Summary of the Neural Network Architecture in the AudioLM Framework:
+
+The AudioLM framework proposed in the paper combines semantic and acoustic tokens in a hierarchical manner to achieve long-term consistency and high-quality audio generation. The neural network architecture involves a hybrid tokenization scheme with a multi-stage Transformer-based language model. It includes a tokenizer model, a decoder-only Transformer language model, and a detokenizer model. The model operates on discrete tokens to increase temporal context size and simplify training setup.
+
+The architecture follows a hierarchical modeling approach where semantic tokens are first modeled for the entire sequence and then used as conditioning to predict acoustic tokens. This approach aims to capture linguistic content and acoustic details separately to ensure high-quality audio synthesis. The model consists of three stages: semantic modeling for structural coherence, coarse acoustic modeling conditioned on semantic tokens, and fine acoustic modeling. Identical decoder-only Transformers are used in all stages with specific configurations, resulting in a model parameter size of 0.3B per stage.
+
+Additionally, the paper mentions the use of a convolutional network for speaker classification and compares the AudioLM framework with other causal models for speech generation. The overall architecture of AudioLM involves autoregressive prediction through three stages of language modeling to generate audio from the coarsest semantic level to the finest acoustic details.

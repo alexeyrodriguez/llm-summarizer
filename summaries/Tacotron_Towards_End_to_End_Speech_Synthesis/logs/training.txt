@@ -11,31 +11,49 @@ Page 1:
 The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
 
 Page 2:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
 
 Page 3:
-The paper provides the following information related to how the neural network was trained:
-
-- Hyper-parameters and network architectures were specified in Table 1.
-- The encoder and decoder pre-net structures were described.
-- The decoder utilized a content-based tanh attention mechanism.
-- The decoder target was set as an 80-band mel-scale spectrogram.
-- Multiple, non-overlapping output frames were predicted at each decoder step to increase convergence speed.
+The paper provides information on the hyper-parameters and network architectures used in the training of the neural network. Some of the key details include:
+- Spectral analysis pre-emphasis: 0.97
+- Frame length: 50 ms
+- Frame shift: 12.5 ms
+- Window type: Hann
+- Character embedding: 256-D
+- Encoder CBHG Conv1D bank: K=16, conv-k-128-ReLU
+- Max pooling: stride=1, width=2
+- Conv1D projections: conv-3-128-ReLU → conv-3-128-Linear
+- Highway net: 4 layers of FC-128-ReLU
+- Bidirectional GRU: 128 cells
+- Encoder pre-net: FC-256-ReLU → Dropout(0.5) → FC-128-ReLU → Dropout(0.5)
+- Decoder pre-net: FC-256-ReLU → Dropout(0.5) → FC-128-ReLU → Dropout(0.5)
+- Decoder RNN: 2-layer residual GRU (256 cells)
+- Attention RNN: 1-layer GRU (256 cells)
+- Post-processing net: Conv1D bank: K=8, conv-k-128-ReLU → conv-3-256-ReLU → conv-3-80-Linear
+- Highway net: 4 layers of FC-128-ReLU
+- Bidirectional GRU: 128 cells
+- Reduction factor (r): 2
 
 Page 4:
-The paper provides details on the training process of the neural network, including the batch size, learning rate, number of epochs, and losses. The model was trained using a batch size of 32, with an Adam optimizer starting from a learning rate of 0.001 and decaying to 0.0005, 0.0003, and 0.0001 after 500K, 1M, and 2M global steps, respectively. The training utilized a simple ℓ1 loss for both the seq2seq decoder and post-processing net, with equal weights assigned to the two losses.
+The paper provides the following information related to how the neural network was trained:
+
+- Batch size: 32
+- Learning rate decay: starts from 0.001 and is reduced to 0.0005, 0.0003, and 0.0001 after 500K, 1M, and 2M global steps, respectively
+- Loss function: simple ℓ1 loss for both seq2seq decoder (mel-scale spectrogram) and post-processing net (linear-scale spectrogram)
+- Training with all sequences padded to a max length
+- Not using loss mask on zero-padded frames to avoid repeated sounds towards the end of the output
 
 Page 5:
-The neural network was trained with a vanilla seq2seq model using 2 layers of residual RNNs, each layer having 256 GRU cells. Scheduled sampling with a sampling rate of 0.5 was required for the model to learn alignments and generalize.
+The neural network was trained with a vanilla seq2seq model using 2 layers of residual RNNs, each layer having 256 GRU cells. Scheduled sampling with a sampling rate of 0.5 was used for the model to learn alignments and generalize.
 
 Page 6:
 The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
 
 Page 7:
-The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+The text related to how the neural network was trained is not present in the provided context.
 
 Page 8:
-The paper does not contain specific information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+The paper does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
 
 Page 9:
 I'm sorry, but the context provided does not contain the specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.

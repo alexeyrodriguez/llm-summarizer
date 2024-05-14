@@ -1,0 +1,91 @@
+
+Please consider the machine learning paper provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+Neural Codec Language Models are
+Zero-Shot Text to Speech Synthesizers
+Chengyi Wang∗Sanyuan Chen∗Yu Wu∗Ziqiang Zhang Long Zhou Shujie Liu
+Zhuo Chen Yanqing Liu Huaming Wang Jinyu Li Lei He Sheng Zhao Furu Wei
+Microsoft
+https://github.com/microsoft/unilm
+Abstract
+We introduce a language modeling approach for text to speech synthesis (TTS).
+Speciﬁcally, we train a neural codec language model (called VALL-E ) using
+discrete codes derived from an off-the-shelf neural audio codec model, and re-
+gard TTS as a conditional language modeling task rather than continuous signal
+regression as in previous work. During the pre-training stage, we scale up the TTS
+training data to 60K hours of English speech which is hundreds of times larger than
+existing systems. VALL-E emerges in-context learning capabilities and can be
+used to synthesize high-quality personalized speech with only a 3-second enrolled
+recording of an unseen speaker as an acoustic prompt. Experiment results show
+that VALL-E signiﬁcantly outperforms the state-of-the-art zero-shot TTS system
+in terms of speech naturalness and speaker similarity. In addition, we ﬁnd VALL-E
+could preserve the speaker’s emotion and acoustic environment of the acoustic
+prompt in synthesis. See https://aka.ms/valle for demos of our work.
+Figure 1: The overview of VALL-E . Unlike the previous pipeline (e.g., phoneme →mel-spectrogram
+→waveform), the pipeline of VALL-E is phoneme→discrete code→waveform. VALL-E
+generates the discrete audio codec codes based on phoneme and acoustic code prompts, corresponding
+to the target content and the speaker’s voice. VALL-E directly enables various speech synthesis
+applications, such as zero-shot TTS, speech editing, and content creation combined with other
+generative AI models like GPT-3 [Brown et al., 2020].
+∗These authors contributed equally to this work. Correspondence: {yuwu1,shujliu,fuwei}@microsoft.comarXiv:2301.02111v1  [cs.CL]  5 Jan 2023
+
+Page 1:
+1 Introduction
+The last decade has yielded dramatic breakthroughs in speech synthesis through the development of
+neural networks and end-to-end modeling. Currently, cascaded text to speech (TTS) systems [Shen
+et al., 2018, Ren et al., 2019, Li et al., 2019] usually leverage a pipeline with an acoustic model and a
+vocoder using mel spectrograms as the intermediate representations. While advanced TTS systems
+can synthesize high-quality speech from single or multiple speakers [Liu et al., 2022, Kim et al.,
+2021], it still requires high-quality clean data from the recording studio. Large-scale data crawled
+from the Internet cannot meet the requirement, and always lead to performance degradation. Because
+the training data is relatively small, current TTS systems still suffer from poor generalization. Speaker
+similarity and speech naturalness decline dramatically for unseen speakers in the zero-shot scenario.
+To tackle the zero-shot TTS problem, existing work leverages speaker adaptation [Chen et al., 2019,
+Wang et al., 2020] and speaker encoding [Arik et al., 2018, Casanova et al., 2022b] methods, requiring
+additional ﬁne-tuning, complex pre-designed features, or heavy structure engineering.
+Instead of designing a complex and speciﬁc network for this problem, the ultimate solution is to
+train a model with large and diverse data as much as possible, motivated by success in the ﬁeld of
+text synthesis [Brown et al., 2020, Chowdhery et al., 2022]. Recent years have witnessed notable
+performance improvement for data increase in the text language model, from 16GB of uncompressed
+text [Devlin et al., 2019], to 160GB [Liu et al., 2019], to 570GB [Brown et al., 2020], and ﬁnally,
+around 1TB [Chowdhery et al., 2022]. Transferring this success to the ﬁeld of speech synthesis, we
+introduce VALL-E , the ﬁrst language model based TTS framework leveraging the large, diverse, and
+multi-speaker speech data. As shown in Figure 1, to synthesize personalized speech (e.g., zero-shot
+TTS), VALL-E generates the corresponding acoustic tokens conditioned on the acoustic tokens of
+the 3-second enrolled recording and the phoneme prompt, which constrain the speaker and content
+information respectively. Finally, the generated acoustic tokens are used to synthesize the ﬁnal
+waveform with the corresponding neural codec decoder [Défossez et al., 2022]. The discrete acoustic
+tokens derived from an audio codec model enable us to treat TTS as conditional codec language
+modeling, and advanced prompting-based large-model techniques (as in GPTs [Brown et al., 2020])
+can be leveraged for the TTS tasks. The acoustic tokens also allow us to generate diverse synthesized
+results in TTS by using different sampling strategies during inference.
+We train VALL-E with LibriLight [Kahn et al., 2020], a corpus consisting of 60K hours of English
+speech with over 7000 unique speakers. The original data is audio-only, so we employ a speech
+recognition model to generate the transcriptions. Compared to previous TTS training datasets, such
+as LibriTTS [Zen et al., 2019], our data contain more noisy speech and inaccurate transcriptions but
+provide diverse speakers and prosodies. We believe the proposed approach is robust to the noise and
+generalize well by leveraging large data. It is worth noting that existing TTS systems are always
+trained with dozens of hours of single-speaker data or hundreds of hours of multi-speaker data, which
+is over hundreds of times smaller than VALL-E . Table 1 summarizes the innovation of VALL-
+E, a language model approach for TTS, using audio codec codes as intermediate representations,
+leveraging large and diverse data, leading to strong in-context learning capabilities.
+Table 1: A comparison between VALL-E and current cascaded TTS systems.
+Current Systems VALL-E
+Intermediate representation mel spectrogram audio codec code
+Objective function continuous signal regression language model
+Training data ≤600hours 60K hours
+In-context learning  
+We evaluate VALL-E on LibriSpeech [Panayotov et al., 2015] and VCTK [Veaux et al., 2016]
+datasets, where all test speakers are unseen in the training corpus. VALL-E signiﬁcantly outperforms
+the state-of-the-art zero-shot TTS system [Casanova et al., 2022b] in terms of speech naturalness and
+speaker similarity, with +0.12 comparative mean option score (CMOS) and +0.93 similarity mean
+option score (SMOS) improvement on LibriSpeech. VALL-E also beats the baseline on VCTK with
++0.11 SMOS and +0.23 CMOS improvements. It even achieves a +0.04 CMOS score against ground
+truth, showing the synthesized speech of unseen speakers is as natural as human recordings on VCTK.
+Moreover, the qualitative analysis shows that VALL-E is able to synthesize diverse outputs with the
+2
+

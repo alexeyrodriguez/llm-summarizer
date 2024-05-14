@@ -1,0 +1,23 @@
+
+Please consider the neural network details provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+The neural network architecture described in the paper consists of two components: 
+(1) a recurrent sequence-to-sequence feature prediction network with attention that predicts mel spectrogram frames from an input character sequence, and 
+(2) a modified version of WaveNet that generates time-domain waveform samples conditioned on the predicted mel spectrogram frames.
+
+Page 1:
+The neural network architecture described in the paper includes an encoder and a decoder with attention. The encoder converts a character sequence into a hidden feature representation, which the decoder uses to predict a spectrogram. The decoder is an autoregressive recurrent neural network that predicts a mel spectrogram frame by frame. Additionally, a WaveNet vocoder architecture is used to invert the mel spectrogram feature representation into time-domain waveform samples.
+
+Page 2:
+The neural network architecture used in the paper is a modified WaveNet.
+
+Page 3:
+The neural network architecture used in the paper is Tacotron 2, which is a fully neural TTS system that combines a sequence-to-sequence recurrent network with attention to predict mel spectrograms with a modified WaveNet vocoder.
+
+Page 4:
+The paper does not contain information related to neural network architecture.
+

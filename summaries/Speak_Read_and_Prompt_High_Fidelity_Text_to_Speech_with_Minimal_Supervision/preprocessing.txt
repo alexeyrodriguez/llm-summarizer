@@ -1,0 +1,11 @@
+Based on the provided context, the data preprocessing for training in the paper includes the following steps:
+
+1. Pretraining the encoder-decoder Transformer on a denoising pretext task.
+2. Using backtranslation to generate synthetic parallel data from an audio-only corpus.
+3. Unrolling standard abbreviations and applying a phonemizer to obtain a string representation in a vocabulary of 47 tokens.
+4. Obtaining semantic tokens by quantizing embeddings from the 7th layer of w2v-BERT using a codebook of size 512.
+5. Extracting acoustic tokens from a SoundStream neural codec with 3 quantization levels, each with a codebook of size 1024.
+6. Controlling audio quality by resampling and bandwidth extension from 16 to 24 kHz.
+7. Downsampling the data by factors of 1, 2, 5, and 10 to measure the effect on Character Error Rate (CER).
+
+Overall, the data preprocessing for training in the paper involves a combination of denoising tasks, backtranslation, tokenization, quantization, resampling, and downsampling to prepare the data for training the model effectively.

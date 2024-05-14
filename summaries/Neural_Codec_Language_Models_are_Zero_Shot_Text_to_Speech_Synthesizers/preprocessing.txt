@@ -1,0 +1,11 @@
+Overall Summary of Data Preprocessing for Training:
+
+1. The data preprocessing for training involved using a pre-trained neural audio codec model, EnCodec, which encodes audio samples into discrete acoustic codes. This model utilizes residual vector quantization with specific quantizers based on bitrate settings to generate real-valued embeddings for waveform reconstruction at 24 kHz.
+
+2. During training, waveform data is randomly cropped to lengths between 10 seconds and 20 seconds. Phoneme alignments are used as prompts, consecutive repetitions in force-aligned phoneme sequences are removed, and random segments of 3-second waveforms are selected for NAR acoustic prompt tokens.
+
+3. Different prompts are used to train the NAR model, including NAR-no prompt (without prompts), NAR-phn prompt (using only phoneme sequences), and NAR-2 prompts (utilizing both phoneme and acoustic token prompts). The addition of prompts significantly impacts the model's performance in terms of Word Error Rate (WER) and speaker similarity scores.
+
+4. VALL-E was pre-trained with 60K hours of speech data, although specific details on data preprocessing for this pre-training are not provided in the context.
+
+Overall, the data preprocessing for training involves utilizing pre-trained models, cropping waveforms, using phoneme alignments as prompts, removing repetitions in phoneme sequences, selecting random segments for acoustic prompts, and experimenting with different prompt settings to improve model performance.

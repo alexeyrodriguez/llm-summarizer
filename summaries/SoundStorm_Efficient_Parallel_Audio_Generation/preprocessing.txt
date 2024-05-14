@@ -1,0 +1,8 @@
+Based on the information provided in the context, the data preprocessing for training involved several steps:
+
+1. Randomly sampling a timestep without masking any tokens before this timestep.
+2. Conditioning tokens were never masked.
+3. Designing a masking scheme that proceeded by sampling the prompt delimiter timestep and the current RVQ level.
+4. Extracting semantic tokens by training a 0.6B parameter BEST-RQ model on the dataset and fitting k-means with 4096 cluster centers to the activations of layer 13 of the BEST-RQ model. This resulted in 25 semantic tokens per second with a codebook size of 4096.
+
+Overall, the data preprocessing for training involved sampling timesteps, conditioning tokens, and extracting semantic tokens using a specific model and clustering technique.

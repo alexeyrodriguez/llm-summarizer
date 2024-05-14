@@ -1,0 +1,10 @@
+Based on the details provided in the context, the dataset used to train the neural network in the machine learning paper is a combination of different datasets. The overall summary of the dataset used can be described as follows:
+
+- The neural network training involved a combination of pretraining and back-translation techniques.
+- The large dataset used for pretraining is 551 hours from LibriTTS (Zen et al., 2019).
+- A small parallel dataset for backtranslation was used, with just 15 minutes of data from a single speaker from LJSpeech (Ito and Johnson, 2017).
+- Other datasets mentioned include LibriLight for acoustic and semantic tokens, LibriTTS (Zen et al., 2019) for backtranslation, and subsets of LJSpeech (Ito and Johnson, 2017).
+- The paper also mentions the use of LibriLight (Kahn et al., 2020) for pretraining and audio-only data.
+- Additionally, the LJ Speech dataset was used for training the neural network.
+
+Overall, the dataset used for training the neural network in the paper is a combination of large speech datasets for pretraining and smaller datasets for specific tasks like backtranslation, acoustic and semantic tokens, and audio-only data.

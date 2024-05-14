@@ -1,0 +1,196 @@
+
+Please consider the machine learning paper provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+SoundStorm: Efﬁcient Parallel Audio Generation
+Zal´an Borsos1Matt Shariﬁ1Damien Vincent1Eugene Kharitonov1Neil Zeghidour1Marco Tagliasacchi1
+Abstract
+We present SoundStorm, a model for efﬁcient,
+non-autoregressive audio generation. Sound-
+Storm receives as input the semantic tokens of
+AudioLM, and relies on bidirectional attention
+and conﬁdence-based parallel decoding to gen-
+erate the tokens of a neural audio codec. Com-
+pared to the autoregressive generation approach
+of AudioLM, our model produces audio of the
+same quality and with higher consistency in
+voice and acoustic conditions, while being two
+orders of magnitude faster. SoundStorm gen-
+erates 30 seconds of audio in 0.5 seconds on
+a TPU-v4. We demonstrate the ability of our
+model to scale audio generation to longer se-
+quences by synthesizing high-quality, natural di-
+alogue segments, given a transcript annotated
+with speaker turns and a short prompt with the
+speakers’ voices. Audio samples are available
+athttps://google-research.github.
+io/seanet/soundstorm/examples/
+1. Introduction
+Modeling discrete representations of audio produced by
+neural codecs (Zeghidour et al., 2022; D ´efossez et al., 2022)
+makes the task of audio generation amenable to the pow-
+erful Transformer-based sequence-to-sequence modeling
+approaches (Vaswani et al., 2017). Casting unconditional
+and conditional audio generation as sequence-to-sequence
+modeling has unlocked rapid progress in speech continu-
+ation (Borsos et al., 2022), text-to-speech (Wang et al.,
+2023; Kharitonov et al., 2023), and general audio and music
+generation (Kreuk et al., 2022; Agostinelli et al., 2023).
+For generating high-quality audio by modeling the tokens
+of a neural codec, the rate of the discrete representation
+must be increased, resulting in either an exponential growth
+in codebook size or in long token sequences. While the
+exponential growth of the codebook is prohibitive due to
+memory limitations, in turn, long token sequences also
+present computational challenges for autoregressive models.
+1Google Research.In particular, attention-based models, which are the main
+focus of this work, will incur quadratic runtime complexity
+with respect to the sequence length for calculating the
+self-attention. Thus, addressing the trade-off between
+perceptual quality and runtime is one of the core challenges
+for audio generation.
+The problem of generating long audio token sequences can
+be addressed by at least three orthogonal approaches, or
+a combination thereof: i) efﬁcient attention mechanisms
+(Kitaev et al., 2020; Choromanski et al., 2021; Xiong
+et al., 2021; Hawthorne et al., 2022), ii) non-autoregressive,
+parallel decoding schemes (Gu et al., 2017; Ghazvininejad
+et al., 2019; Chang et al., 2022), iii) custom architectures
+adapted to the special structure of the tokens produced
+by neural audio codecs (Kreuk et al., 2022; Wang et al.,
+2023; Lee et al., 2022). However, in the context of
+modeling the token sequence of neural audio codecs, either
+unconditionally or based on weak conditioning such as
+text, the efﬁcient generation of long, high-quality audio
+segments remains an open problem.
+We believe that it is the special structure of the audio token
+sequence that holds the most promise for future advances
+in long-sequence audio modeling. Concretely, both Sound-
+Stream (Zeghidour et al., 2022) and EnCodec (D ´efossez
+et al., 2022) rely on Residual Vector Quantization (RVQ),
+where each compressed audio frame is quantized by a series
+of quantizers, with each quantizer operating on the residual
+of the previous one, and the number of quantizers control-
+ling the overall bitrate. This induces a hierarchical token
+structure, where tokens from ﬁner RVQ levels contribute
+less to the perceptual quality, allowing for efﬁcient factor-
+izations and approximations of the joint distribution of the
+token sequence. Hence, the models and decoding schemes
+should take this special structure of the input into account
+for efﬁcient training and inference.
+In this work, we present SoundStorm, a method for ef-
+ﬁcient and high-quality audio generation. SoundStorm
+addresses the problem of generating long audio token se-
+quences by relying on: i) an architecture adapted to the
+hierarchical structure of the audio tokens, ii) a parallel,
+non-autoregressive, conﬁdence-based decoding scheme in-
+spired by MaskGIT (Chang et al., 2022) for residual vector-
+quantized token sequences.arXiv:2305.09636v1  [cs.SD]  16 May 2023
+
+Page 1:
+SoundStorm: Efﬁcient Parallel Audio Generation
+SoundStorm relies on a bidirectional attention-based Con-
+former (Gulati et al., 2020) that is trained to predict masked
+audio tokens produced by SoundStream given a condition-
+ing signal such as the semantic tokens of AudioLM (Borsos
+et al., 2022). On the input side, it sums up the embeddings
+of the tokens corresponding to the same SoundStream frame,
+such that the internal sequence length for the self-attention
+is identical to the number of SoundStream frames, and in-
+dependent of the number of quantizers in the RVQ. The
+output embeddings are then processed by separate heads per
+RVQ level to predict the masked target tokens. At inference
+time, given the conditioning signal, SoundStorm starts with
+all audio tokens masked out, and ﬁlls in the masked tokens
+RVQ level-by-level over several iterations, predicting multi-
+ple tokens in parallel during a single iteration within a level.
+To support this inference scheme, we propose a masking
+scheme for training that mimics the inference procedure.
+We demonstrate that SoundStorm can serve as AudioLM’s
+acoustic generator, replacing both AudioLM’s stage two
+(coarse acoustic model) and stage three (ﬁne acoustic
+model). SoundStorm produces audio two orders of mag-
+nitude faster than AudioLM’s hierarchical autoregressive
+acoustic generator with matching quality and improved con-
+sistency in terms of speaker identity and acoustic condi-
+tions. Furthermore, we show that SoundStorm, coupled
+with the text-to-semantic modeling stage of SPEAR-TTS
+(Kharitonov et al., 2023), can synthesize high-quality, nat-
+ural dialogues, allowing one to control the spoken content
+(via transcripts), speaker voices (via short voice prompts)
+and speaker turns (via transcript annotations). When synthe-
+sizing dialogues of 30 seconds, we measure a runtime of 2
+seconds on a single TPU-v4 (Jouppi et al., 2023).
+2. Related work
+Modeling the tokens of neural audio codecs. Unsuper-
+vised speech embeddings (Baevski et al., 2020; Hsu et al.,
+2021; Chung et al., 2021) have provided a low-framerate
+representation of the underlying signal which remains rich
+enough after discretization for language models to generate
+intelligible speech from a speciﬁc speaker as a sequence of
+tokens (Lakhotia et al., 2021). Neural audio codecs (Zeghi-
+dour et al., 2022; D ´efossez et al., 2022), with their ability of
+reconstructing high-quality audio at very low bitrates, sub-
+sequently allowed for extending discrete modeling to audio
+signals as diverse as multi-speaker speech and piano (Bor-
+sos et al., 2022; Kharitonov et al., 2023), music (Agostinelli
+et al., 2023) or sound effects (Kreuk et al., 2022). In particu-
+lar, AudioLM (Borsos et al., 2022) introduces a hierarchical
+sequence-to-sequence approach where high-level seman-
+tic tokens are generated as an intermediate representation,
+which is then used as a conditioning signal for predicting
+tokens of a SoundStream (Zeghidour et al., 2022) codec.While this hierarchical approach has demonstrated remark-
+able results for speech (Kharitonov et al., 2023) and music
+modeling (Agostinelli et al., 2023; Donahue et al., 2023),
+the computational cost of modeling ﬂattened SoundStream
+tokens with self-attention scales quadratically with the se-
+quence length and thus the bitrate of the neural codec, pre-
+venting these models from generating long-form audio with
+high quality. SoundStorm alleviates this issue by modeling
+the multi-level tokens of the neural codec in parallel, induc-
+ing a two-order of magnitude speed-up over autoregressive
+modeling and unlocking the ability to scale audio generation
+abilities both in quality and in sequence length.
+RVQ-aware architectures. A common design choice for
+modeling RVQ token sequences is to sum the embeddings
+corresponding to the same RVQ input embedding (frame)
+in order to reduce the sequence length. Operating on such
+sequences, AudioGen (Kreuk et al., 2022) proposes a Trans-
+former with Qseparate heads for the different RVQ levels,
+predicting the tokens for an RVQ frame in parallel. While
+providing a signiﬁcant speedup for inference, the authors
+found that, for text-to-audio generation, this approach has
+an inferior performance compared to modeling the token
+sequence of a neural audio codec with similar bitrate and re-
+construction quality, but with a single level of quantization.
+V ALL-E (Wang et al., 2023) instead relies on a hybrid
+approach, where the tokens corresponding to the ﬁrst RVQ
+level are predicted autoregressively, and the subsequent
+levels are produced non-autoregressively. The latter is
+achieved by a model that sums up the embeddings from
+the same RVQ input frame, and applies bidirectional
+self-attention to predict all tokens from RVQ level q+ 1
+given all tokens from levels 1,...,q , the acoustic prompt
+and the phoneme sequence. During inference, tokens
+starting from the second level of the RVQ are produced
+iteratively, performing greedy decoding (choosing the most
+likely tokens) level-by-level. Level-wise greedy decoding
+represents the baseline for our method.
+Modeling sequences produced by RVQ has been also inves-
+tigated in domains other than audio. For example, the RQ-
+Transformer (Lee et al., 2022) also adds up the embeddings
+corresponding to the same RVQ input frame, but factorizes
+the full joint distribution efﬁciently with a spatial and a
+depth Transformer, for modeling autoregressively the RVQ
+frames and tokens within the frames, respectively. While
+it has not been demonstrated yet, this approach, potentially
+coupled with parallel decoding schemes, is a promising
+future avenue for audio generation.
+Parallel decoding. In order to improve the inference time
+and to allow bidirectional non-causal attention on the input
+sequence, parallel decoding schemes have been proposed
+for text (Gu et al., 2017; Ghazvininejad et al., 2019), im-
+

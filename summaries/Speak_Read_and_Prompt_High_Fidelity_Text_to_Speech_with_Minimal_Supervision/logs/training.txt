@@ -1,0 +1,81 @@
+
+Please consider the details for neural network training provided in the context below
+and provide an overall summary for the training procedure and hyperparameters.
+
+
+Context:
+Page 0:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 1:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 2:
+The paper provides details on how the neural network was trained, including pretraining methods such as denoising pretext task and backtranslation. The training process involves freezing upper layers of the encoder and fine-tuning lower layers for the S1 task. The exact number of layers to tune is a hyperparameter.
+
+Page 3:
+The paper describes the training process of the neural network as follows:
+
+"We start with pretraining an encoder-decoder model on a denoising task, using a semantic-token representation of speech-only data. Next, we finetune its decoder to backtranslate using a small parallel dataset. Then, we use this model to transcribe the speech-only dataset and obtain a synthetic parallel dataset. In turn, this synthetic dataset is used to finetune the encoder for 'translation' in the forward direction, along with the original small parallel dataset."
+
+Page 4:
+The paper provides details on how the neural network was trained, including the use of LibriLight dataset for training the self-supervised representation models, training S1 on the LJSpeech dataset, and the random selection of subsets of data for training in low-resource scenarios.
+
+Page 5:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 6:
+The hyperparameters and training details extracted from the paper are as follows:
+
+- Optimizer: Adafactor
+- Learning rate decay: Square-root
+- Regularization method: Label smoothing with a smoothing parameter of 0.1
+- Probability of deleting individual tokens during pretraining: 0.6
+- Dropout probability: 0.5
+- Batch size: 256
+- Pretraining updates: 1 million
+- Architecture: T5-Large
+- Number of layers in T5-Large: 24
+
+Page 7:
+The text related to how the neural network was trained is as follows:
+
+"When evaluating SPEAR-TTS, we consider the following training settings for S1: (a) training from scratch using parallel data; (b) finetuning the pretrained checkpoint P using parallel data; (c) finetuning the pretrained checkpoint P to obtain the backtranslation model and then training the forward model from scratch on the synthetically generated data; (d) same as (c), but both the backward and the forward models are obtained by finetuning P with an additional finetuning of the forward model on the original parallel data."
+
+Page 8:
+The text related to how the neural network was trained is not present in the provided context.
+
+Page 9:
+The text related to how the neural network was trained is as follows:
+
+"TheS1model is trained on 15 min of parallel data."
+
+Page 10:
+The text related to how the neural network was trained is not present in the provided context.
+
+Page 11:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 12:
+The text related to how the neural network was trained is not present in the provided context.
+
+Page 13:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 14:
+The provided context does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 15:
+The text related to how the neural network was trained in the paper is as follows:
+
+"We train the latter on LibriTTS (Zen et al., 2019) with 4 residual vector quantizer layers, a codebook size of 1024 per layer and 50 Hz embedding rate, resulting in a 2000 bit/s codec."
+
+Page 16:
+The paper provides information on the architecture details of the Transformer layers used in the training of the neural network. The table in the paper reports details for T5-small, T5-base, and T5-large layers. The number of layers used is defined by a grid search.
+
+Page 17:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 18:
+I'm sorry, but the context provided does not contain information related to how the neural network was trained (such as batch size, learning rate, number of epochs, losses).
+

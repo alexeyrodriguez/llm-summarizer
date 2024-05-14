@@ -1,0 +1,39 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 1:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 2:
+The data preprocessing for training involved computing acoustic tokens using SoundStream, a neural audio codec, and semantic tokens using w2v-BERT, a self-supervised audio representation model. SoundStream utilized a convolutional encoder with a residual vector quantizer to produce embeddings at a reduced sampling rate, while w2v-BERT employed a Conformer-based model with k-means clustering on intermediate layer embeddings to generate semantic tokens.
+
+Page 3:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 4:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 5:
+The paper provides information on how the data was preprocessed for training. Specifically, it mentions using w2v-BERT XL with a set of heuristics for choosing the intermediate layer to quantize and the number of k-means clusters K. The best candidate was identified as the 7th layer in the MLM module of w2v-BERT XL with K=1024 clusters.
+
+Page 6:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 7:
+The information related to how the data was preprocessed for training is not explicitly mentioned in the provided context from the machine learning paper.
+
+Page 8:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 9:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 10:
+The paper does not provide specific information related to how the data was preprocessed for training.
+

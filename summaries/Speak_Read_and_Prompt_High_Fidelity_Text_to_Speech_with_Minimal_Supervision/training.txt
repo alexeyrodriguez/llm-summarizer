@@ -1,0 +1,23 @@
+Summary of Neural Network Training Procedure and Hyperparameters:
+
+Training Procedure:
+- Pretraining an encoder-decoder model on a denoising task using a semantic-token representation of speech-only data.
+- Finetuning the decoder through backtranslation using a small parallel dataset.
+- Transcribing speech-only data to create a synthetic parallel dataset for further training.
+- Finetuning the encoder for translation using the synthetic dataset and original parallel data.
+- Training S1 on the LJSpeech dataset.
+- Training self-supervised representation models on the LibriLight dataset.
+- Random selection of subsets of data for training in low-resource scenarios.
+
+Hyperparameters:
+- Optimizer: Adafactor
+- Learning rate decay: Square-root
+- Regularization method: Label smoothing with a smoothing parameter of 0.1
+- Probability of deleting individual tokens during pretraining: 0.6
+- Dropout probability: 0.5
+- Batch size: 256
+- Pretraining updates: 1 million
+- Architecture: T5-Large
+- Number of layers in T5-Large: 24
+
+Overall, the training procedure involves a combination of pretraining, finetuning, and data synthesis techniques, while the hyperparameters include details on optimization, regularization, and model architecture.

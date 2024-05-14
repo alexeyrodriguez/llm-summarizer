@@ -1,0 +1,67 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 1:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 2:
+The paper discusses the preprocessing of data for training the model, including pretraining the encoder-decoder Transformer on a denoising pretext task and using backtranslation to generate synthetic parallel data from an audio-only corpus.
+
+Page 3:
+The data was preprocessed for training by starting with pretraining an encoder-decoder model on a denoising task using a semantic-token representation of speech-only data. The decoder was then finetuned to backtranslate semantic tokens to transcripts using a small parallel dataset.
+
+Page 4:
+The data preprocessing for training involved randomly selecting two non-overlapping windows of speech from each training example to compute sequences of semantic and acoustic tokens. One window was considered as the prompt and the other as the target output. The sequences were concatenated in the order of semantic tokens from the prompt, semantic tokens from the target, acoustic tokens from the prompt, and acoustic tokens from the target. During training, these sequences were used as prefixes for the model to learn to generate the target acoustic tokens.
+
+Page 5:
+The text related to how the data was preprocessed for training is as follows:
+
+"To prepare the data for training, we unroll standard abbreviations used in LJSpeech. Next, we apply the G2p_en phonemizer (Park and Kim, 2019). After removing the lexical stress information from its output, we obtain a string representation in a vocabulary of 47 tokens (39 phonemes from the CMU Dictionary, whitespace, and punctuation)."
+
+Page 6:
+The data preprocessing for training involved obtaining semantic tokens by quantizing embeddings from the 7th layer of w2v-BERT using a codebook of size 512. Acoustic tokens were extracted from a SoundStream neural codec with 3 quantization levels, each with a codebook of size 1024.
+
+Page 7:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 8:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 9:
+The paper does not provide specific information related to how the data was preprocessed for training.
+
+Page 10:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 11:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 12:
+The paper does not provide specific information related to how the data was preprocessed for training.
+
+Page 13:
+I'm sorry, but the context provided does not contain specific information related to how the data was preprocessed for training.
+
+Page 14:
+I'm sorry, but the context provided does not contain information related to how the data was preprocessed for training.
+
+Page 15:
+The data preprocessing for training involved controlling audio quality by resampling and bandwidth extension from 16 to 24 kHz. The bandwidth extension task was formulated as a sequence-to-sequence mapping of tokens produced by different codecs at different frequencies. The training data for this task was created by extracting token sequence pairs from LibriTTS. The audio quality was controlled by sampling from SPEAR-TTS, with the number of samples (ns) affecting the quality and recognition error. The selected example with the highest MOS estimate was used for calculating CER, with ns=3 chosen as a trade-off between computational complexity and quality estimate.
+
+Page 16:
+The text related to how the data was preprocessed for training is as follows:
+
+"Table 10: CER (%) of SPEAR-TTS using a grapheme-based text representation. SPEAR-TTS is trained with pretraining and backtranslation, using 15 minute subset of LJSpeech as parallel data."
+
+Page 17:
+The data was downsampled by factors of 1, 2, 5, and 10 before training to measure the effect on Character Error Rate (CER).
+
+Page 18:
+The text does not contain information related to how the data was preprocessed for training.
+

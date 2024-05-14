@@ -1,0 +1,25 @@
+
+Please consider the details for the dataset used in the neural network training provided in the context below
+and provide an overall summary for the dataset used.
+
+
+Context:
+Page 0:
+The paper used the following dataset to train the neural network:
+
+"Trained directly on normalized character sequences and corresponding speech waveforms"
+
+Page 1:
+The paper does not mention the specific dataset used to train the neural network.
+
+Page 2:
+The dataset used to train the neural network in the machine learning paper is described as follows:
+
+"We train all models on an internal US English dataset[ 12], which contains 24.6 hours of speech from a single professional female speaker. All text in our datasets is spelled out. e.g., “16” is written as “sixteen”, i.e., our models are all trained on normalized text."
+
+Page 3:
+The paper does not explicitly mention the dataset used to train the neural network.
+
+Page 4:
+The paper does not mention the specific dataset used to train the neural network.
+

@@ -1,8 +1,3 @@
-Based on the information provided in the context, the dataset used to train the neural network for the Tacotron model is an internal North American English dataset. This dataset consists of approximately 24.6 hours of speech data spoken by a professional female speaker. 
+Summary of the dataset used in the neural network training for the Tacotron model:
 
-Overall Summary:
-- Dataset: Internal North American English dataset
-- Speech Data: Approximately 24.6 hours
-- Speaker: Professional female speaker
-
-This dataset was utilized for training the neural network in the machine learning paper, although specific details beyond the language, duration, and speaker characteristics are not provided in the context.
+The dataset used in the neural network training is an internal North American English dataset containing approximately 24.6 hours of speech data spoken by a professional female speaker. This dataset was utilized for training a vanilla seq2seq model in the context of the machine learning paper. The specific details and characteristics of the dataset beyond the language, speaker gender, and duration are not provided in the information available.

@@ -1,0 +1,21 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The data preprocessing for training involved using mel-frequency spectrograms as the intermediate feature representation. This representation was chosen for its smoothness, ease of computation, and ability to be trained separately from the time-domain waveforms.
+
+Page 1:
+The data preprocessing for training involved computing mel spectrograms through a short-time Fourier transform with specific parameters, transforming the STFT magnitude to the mel scale using an 80 channel mel filterbank, and applying log dynamic range compression. Prior to log compression, the filterbank output magnitudes were clipped to a minimum value of 0.01 to limit dynamic range in the logarithmic domain.
+
+Page 2:
+The data preprocessing for training involved applying a standard maximum-likelihood training procedure with teacher-forcing, using the Adam optimizer with specific parameters, L2 regularization, and scaling the waveform targets by a factor of 127.5 to bring the initial outputs closer to the eventual distributions.
+
+Page 3:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 4:
+I'm sorry, but the context provided does not contain information related to how the data was preprocessed for training.
+

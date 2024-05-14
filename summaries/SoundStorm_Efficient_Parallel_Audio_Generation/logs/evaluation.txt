@@ -1,0 +1,43 @@
+
+Please consider the neural network evaluation details (e.g. metrics, results, comparisons) provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+The evaluation of the neural network in the paper is as follows:
+
+"Our model produces audio of the same quality and with higher consistency in voice and acoustic conditions, while being two orders of magnitude faster. SoundStorm generates 30 seconds of audio in 0.5 seconds on a TPU-v4."
+
+Page 1:
+The paper does not provide specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 2:
+The paper does not provide specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 3:
+The evaluation metrics and results related to the neural network in the paper are as follows:
+
+"In a series of subjective evaluation experiments, Borsos et al. (2022) and Kharitonov et al. (2023) have shown that the acoustic generation stage of AudioLM produces audio with quality indistinguishable from the quality of the ground-truth samples. Hence, we consider AudioLM’s hierarchical acoustic generation stages (coarse and fine stages) as a baseline in our experiment."
+
+"Speech intelligibility. We quantify speech intelligibility by measuring the word error rate (WER) and character error rate (CER) of the generated audio after transcribing it with ASR. The generation is conditioned on the ground-truth semantic tokens from LibriSpeech test-clean split (Panayotov et al., 2015). We perform these experiments both in the unprompted setup, where the methods can randomly sample speakers, and in the prompted setup, where the methods should respect the speaker identity provided in the form of ground-truth SoundStream tokens corresponding to the first 3-seconds. We use a Conformer Transducer-L (Gulati et al., 2020) ASR model for transcription."
+
+"We report the results separately on short (4-10 seconds), medium (10-20 seconds), and long (20-30 seconds) segments."
+
+Page 4:
+The evaluation of the neural network in the paper includes metrics related to speech intelligibility, audio quality, voice preservation, and acoustic consistency. SoundStorm matches AudioLM's acoustic generator in audio quality, outperforms it in speech intelligibility and acoustic consistency, and significantly improves over AudioLM in terms of Word Error Rate (WER) and Character Error Rate (CER) on all splits. SoundStorm also outperforms AudioLM in voice preservation and acoustic consistency, with the acoustic consistency score being close to the original samples.
+
+Page 5:
+The evaluation of the neural network in the paper includes runtime measurements and the impact of the number of decoding iterations on audio quality. The runtime analysis shows that SoundStorm can generate audio significantly faster than AudioLM, with a real-time factor of 0.017. Additionally, the study on decoding iterations reveals that using 16 iterations in the first RVQ level improves audio quality compared to greedy decoding, with no significant improvement observed for levels 2-12.
+
+Page 6:
+The paper provides the following information related to the evaluation of the neural network:
+
+"We find that this approach generates high-quality, natural dialogue sequences, generating disfluencies at the occurrence of filler words in the transcript, and allowing for controlled speaker turns through the insertion of the turn marker symbols in the transcript. The total runtime for synthesizing a segment of 30 seconds segment is 2 seconds."
+
+Page 7:
+The requested information related to the evaluation of the neural network is not present in the provided context from the machine learning paper.
+
+Page 8:
+I'm sorry, but the provided context does not contain information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+

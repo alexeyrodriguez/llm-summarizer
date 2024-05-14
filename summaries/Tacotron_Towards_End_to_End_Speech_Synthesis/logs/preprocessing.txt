@@ -29,8 +29,8 @@ Page 7:
 The paper does not provide specific information on how the data was preprocessed for training.
 
 Page 8:
-I'm sorry, but the specific information related to how the data was preprocessed for training is not available in the provided context from the machine learning paper.
+The paper does not provide specific information related to how the data was preprocessed for training.
 
 Page 9:
-I'm sorry, but the context you provided does not contain information related to how the data was preprocessed for training in the machine learning paper.
+I'm sorry, but the context provided does not contain information related to how the data was preprocessed for training in the machine learning paper.
 

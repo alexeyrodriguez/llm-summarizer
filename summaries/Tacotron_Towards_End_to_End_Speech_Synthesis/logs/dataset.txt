@@ -20,7 +20,7 @@ Page 4:
 The dataset used to train the neural network in the machine learning paper is an internal North American English dataset, which contains about 24.6 hours of speech data spoken by a professional female speaker.
 
 Page 5:
-The dataset used to train the neural network in the paper was not explicitly mentioned in the provided context.
+The paper used a vanilla seq2seq model for training the neural network.
 
 Page 6:
 The paper does not provide information about the dataset used to train the neural network.
@@ -32,5 +32,7 @@ Page 8:
 The paper does not provide information about the dataset used to train the neural network.
 
 Page 9:
-The context provided does not contain information about the dataset used to train the neural network in the paper.
+The paper "Fast, compact, and high quality LSTM-RNN based statistical parametric speech synthesizers for mobile devices" by Heiga Zen et al. used the dataset mentioned in the following text:
+
+"Proceedings Interspeech , 2016."
 

@@ -1,0 +1,35 @@
+
+Please consider the neural network details provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+The neural network architecture mentioned in the paper is as follows:
+
+"In this work, we present SoundStorm, a method for efficient and high-quality audio generation. SoundStorm addresses the problem of generating long audio token sequences by relying on: i) an architecture adapted to the hierarchical structure of the audio tokens, ii) a parallel, non-autoregressive, confidence-based decoding scheme inspired by MaskGIT (Chang et al., 2022) for residual vector-quantized token sequences."
+
+Page 1:
+The neural network architecture used in SoundStorm is a bidirectional attention-based Conformer that processes output embeddings with separate heads per RVQ level to predict masked target tokens. The model fills in masked tokens RVQ level-by-level during inference, predicting multiple tokens in parallel within a level.
+
+Page 2:
+The architecture of the model is illustrated in Figure 1. At the input side, we interleave the time-aligned conditioning tokens with the SoundStream tokens at the frame level, embed the resulting sequence, sum the embeddings corresponding to the same frame, including the embedding of the conditioning token, and pass the resulting continuous embeddings to a Conformer. Consequently, the sequence length for bidirectional self-attention in the Conformer is determined by the number of SoundStream frames (typically 50 per second), and thus is independent of the number of RVQ levels Q, allowing one to handle audio with length on the order of minutes. At the output side, we use Q dense layers as heads to produce the target SoundStream tokens.
+
+Page 3:
+The neural network architecture used in the paper is a Conformer with 350M parameters, consisting of 12 layers, 16 attention heads, embedding size and model dimension of 1024, feedforward dimension of 4096, convolution kernel size of 5, and rotary positional embeddings.
+
+Page 4:
+The paper does not provide specific information related to the neural network architecture.
+
+Page 5:
+The paper does not contain specific information related to the neural network architecture.
+
+Page 6:
+The neural network architecture information was not explicitly mentioned in the provided context.
+
+Page 7:
+The paper does not contain information related to neural network architecture.
+
+Page 8:
+The paper does not contain information related to neural network architecture.
+

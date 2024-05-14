@@ -1,0 +1,88 @@
+
+Please consider the neural network evaluation details (e.g. metrics, results, comparisons) provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+The paper introduces a neural codec language model called VALL-E for text to speech synthesis. VALL-E significantly outperforms the state-of-the-art zero-shot TTS system in terms of speech naturalness and speaker similarity. Experiment results show that VALL-E could preserve the speaker’s emotion and acoustic environment of the acoustic prompt in synthesis.
+
+Page 1:
+The evaluation results of VALL-E on LibriSpeech and VCTK datasets show significant improvements over the state-of-the-art zero-shot TTS system, with a +0.12 comparative mean opinion score (CMOS) and +0.93 similarity mean opinion score (SMOS) improvement on LibriSpeech. On VCTK, VALL-E outperforms the baseline with a +0.11 SMOS and +0.23 CMOS improvements, achieving a +0.04 CMOS score against ground truth.
+
+Page 2:
+Evaluation results show that VALL-E significantly outperforms the state-of-the-art zero-shot TTS system on LibriSpeech and VCTK.
+
+Page 3:
+I'm sorry, but the provided context does not contain information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 4:
+The provided text does not contain specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 5:
+The combination of the AR model and the NAR model provides a good trade-off between speech quality and inference speed. On the one hand, the rate of the generated speech should be consistent with the enrolled recording, and it is hard to train a length predictor for different speakers since their speaking speed may be very diverse. In this case, the AR model is a more natural choice with its flexibility for acoustic sequence length prediction. On the other hand, for the consecutive stages, as the number of output slots follows the sequence length of the first stage, NAR can reduce the time complexity from O(T) to O(1). Overall, the prediction of C can be modeled as:
+
+p(C|x,˜C;θ) = p(c:,1|˜C:,1,X;θAR) ∏ j=2 p(c:,j|c:,<j,x,˜C;θNAR)
+
+Page 6:
+The text does not contain information related to the evaluation of the neural network in terms of metrics, results, or comparisons.
+
+Page 7:
+The paper provides the following information related to the evaluation of the neural network:
+
+"Table 2 shows the objective evaluation results. We first compute the WER score and the speaker similarity score of the ground truth speech as the upper bound. To compare the speaker similarity, we use speech pairs from the same speaker in the test set. Compared with the YourTTS baseline, our"
+
+Page 8:
+The evaluation results on audio generation are as follows:
+
+Table 2: Evaluation results on audio generation. YourTTS and VALL-E are text-to-speech models using phonemes as inputs, while GSLM and AudioLM are speech-to-speech models using latent code as inputs. The WER result of AudioLM is obtained by a Conformer Transducer model [Borsos et al., 2022].
+
+GroundTruth: WER 2.2, SPK 0.754
+GSLM: WER 12.4, SPK 0.126
+AudioLM*: WER 6.0, SPK -
+YourTTS: WER 7.7, SPK 0.337
+VALL-E: WER 5.9, SPK 0.580
+VALL-E-continual: WER 3.8, SPK 0.508
+
+VALL-E is better than other speech-to-speech LM-based generative systems in terms of robustness, showing higher fidelity to the given text and enrolled speech.
+
+Page 9:
+Table 6: Automatic evaluation of speaker similarity with 108 speakers on VCTK. *YourTTS has observed 97 speakers during training, while VALL-E observed none of them.
+3s prompt 5s prompt 10s prompt
+108 full speakers
+YourTTS* 0.357 0.377 0.394
+VALL-E 0.382 0.423 0.484
+GroundTruth 0.546 0.591 0.620
+11 unseen speakers
+YourTTS 0.331 0.337 0.344
+VALL-E 0.389 0.380 0.414
+GroundTruth 0.528 0.556 0.586
+
+We first evaluate two models with the speaker verification metric as described before. From Table 6, we can see that VALL-E outperforms the baseline even if the baseline has seen 97 speakers in training, indicating our model is able to synthesize speech with higher speaker similarity. When we compare with the baseline in a fair setting (11 speakers), the performance gap becomes larger, especially when only 3s prompts are available. By comparing different lengths of the prompt, we can see our model is able to generate more similar speech when the prompt becomes longer, which is consistent with our intuition.
+
+Page 10:
+The text extracted from the paper related to the evaluation of the neural network is as follows:
+
+"Table 7: Human evaluation with 60 speakers on VCTK with 3-second enrolled recording for each.
+SMOS CMOS (v.s. VALL-E)
+YourTTS* 3.70 ±0.09 -0.23
+VALL-E 3.81 ±0.09 0.00
+GroundTruth 4.29 ±0.09 -0.04
+score in the comparison with ground truth, which is mainly because the average sentence length is
+shorter and some of the ground truth utterances also have noisy environments in VCTK."
+
+Page 11:
+The paper discusses the qualitative analysis of the VALL-E model for text-to-speech synthesis, highlighting its diversity in output, acoustic environment consistency, and ability to maintain speaker's emotion. The conclusion mentions the model's state-of-the-art zero-shot TTS results and identifies limitations such as synthesis robustness, data coverage, and model structure improvements for future work.
+
+Page 12:
+The text does not contain specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 13:
+The provided context does not contain specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 14:
+I'm sorry, but the provided context does not contain specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+
+Page 15:
+I'm sorry, but the provided context does not contain specific information related to the evaluation of the neural network, such as metrics, results, or comparisons.
+

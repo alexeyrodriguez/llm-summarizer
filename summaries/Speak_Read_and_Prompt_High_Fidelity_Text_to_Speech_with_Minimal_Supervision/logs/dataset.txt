@@ -1,0 +1,65 @@
+
+Please consider the details for the dataset used in the neural network training provided in the context below
+and provide an overall summary for the dataset used.
+
+
+Context:
+Page 0:
+The paper does not mention the specific dataset used to train the neural network for the SPEAR-TTS system.
+
+Page 1:
+The dataset used to train the neural network in the machine learning paper is as follows:
+
+"Our experimental study on English speech shows that, by combining pretraining and back-translation over a large dataset — 551 hours from LibriTTS (Zen et al., 2019) — with just 15 minutes of parallel data from a single speaker — LJSpeech (Ito and Johnson, 2017) — SPEAR-TTS..."
+
+Page 2:
+The paper does not explicitly mention the dataset used to train the neural network.
+
+Page 3:
+The paper used a large speech-only dataset for pretraining and a small parallel dataset for backtranslation.
+
+Page 4:
+The dataset used to train the neural network in the machine learning paper is LibriLight for acoustic and semantic tokens.
+
+Page 5:
+The dataset used to train the neural network in the machine learning paper is LibriLight (Kahn et al., 2020) for pretraining and LibriTTS (Zen et al., 2019) for backtranslation.
+
+Page 6:
+The dataset used to train the neural network in the paper is LJSpeech.
+
+Page 7:
+The paper used the LJSpeech dataset for training the neural network.
+
+Page 8:
+The paper does not explicitly mention the dataset used to train the neural network.
+
+Page 9:
+The dataset used to train the neural network in the paper is the 15-minute LJSpeech subset.
+
+Page 10:
+The dataset used to train the neural network in the paper is subsets of LJSpeech (Ito and Johnson, 2017).
+
+Page 11:
+The dataset used to train the V ALL-E neural network is the "60,000 hours of ASR-transcribed LibriLight."
+
+Page 12:
+The dataset used to train the neural network in the machine learning paper is LibriLight. The paper mentions, "Next, we rely on LibriLight (Kahn et al., 2020) as our audio-only dataset which provides a sufficiently diverse set of audio."
+
+Page 13:
+The LJ speech dataset. https://keithito.com/LJ-Speech-Dataset/
+
+Page 14:
+The paper does not provide information about the dataset used to train the neural network.
+
+Page 15:
+The dataset used to train the neural network in the paper is LibriTTS.
+
+Page 16:
+The dataset used to train the neural network in the paper is LibriSpeech train-clean-100.
+
+Page 17:
+The dataset used to train the neural network in the paper is LibriTTS (Zen et al., 2019).
+
+Page 18:
+The text does not contain information about the dataset used to train the neural network.
+

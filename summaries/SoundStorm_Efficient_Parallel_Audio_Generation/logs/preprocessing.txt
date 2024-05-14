@@ -1,0 +1,35 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 1:
+The paper does not provide specific information related to how the data was preprocessed for training.
+
+Page 2:
+The data preprocessing for training involved randomly sampling a timestep and not masking any tokens before this timestep. Conditioning tokens were never masked, and a masking scheme was designed to proceed by sampling the prompt delimiter timestep and the current RVQ level.
+
+Page 3:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 4:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 5:
+The paper provides information on how the data was preprocessed for training:
+
+"To extract semantic tokens, we train a 0.6B parameter BEST-RQ (Chiu et al., 2022) on this dataset and fit k-means with 4096 cluster centers to the activations of layer 13 of the BEST-RQ model. This results in 25 semantic tokens per second, with a codebook size of 4096."
+
+Page 6:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 7:
+The paper does not provide specific information related to how the data was preprocessed for training.
+
+Page 8:
+I'm sorry, but the provided context does not contain information related to how the data was preprocessed for training.
+

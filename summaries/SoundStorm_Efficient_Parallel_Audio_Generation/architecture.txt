@@ -1,0 +1,13 @@
+Summary of the Neural Network Architecture in the Context:
+
+The neural network architecture described in the context is a Conformer model with specific adaptations for audio generation, known as SoundStorm. The model is designed to efficiently generate high-quality audio by addressing the challenge of generating long audio token sequences. It utilizes a bidirectional attention-based Conformer with separate heads per RVQ level for predicting masked target tokens. The model employs a parallel, non-autoregressive, confidence-based decoding scheme inspired by MaskGIT for residual vector-quantized token sequences.
+
+Key Details:
+- Architecture: Bidirectional attention-based Conformer
+- Specific Features: Separate heads per RVQ level, parallel decoding scheme
+- Input Processing: Interleaving conditioning tokens with SoundStream tokens at the frame level
+- Model Parameters: 350M parameters, 12 layers, 16 attention heads
+- Embedding Size: 1024, Feedforward Dimension: 4096
+- Convolution Kernel Size: 5, Rotary positional embeddings used
+
+Overall, the neural network architecture in the context is tailored for handling audio data efficiently, with a focus on generating long audio sequences while maintaining high quality.

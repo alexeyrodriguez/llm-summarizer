@@ -1,0 +1,217 @@
+
+Please consider the machine learning paper provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+1
+AudioLM: a Language Modeling Approach to Audio
+Generation
+Zal´an Borsos, Rapha ¨el Marinier, Damien Vincent, Eugene Kharitonov, Olivier Pietquin,
+Matt Sharifi, Dominik Roblek, Olivier Teboul, David Grangier, Marco Tagliasacchi, Neil Zeghidour
+Abstract —We introduce AudioLM, a framework for high-
+quality audio generation with long-term consistency. AudioLM
+maps the input audio to a sequence of discrete tokens and casts au-
+dio generation as a language modeling task in this representation
+space. We show how existing audio tokenizers provide different
+trade-offs between reconstruction quality and long-term structure,
+and we propose a hybrid tokenization scheme to achieve both
+objectives. Namely, we leverage the discretized activations of a
+masked language model pre-trained on audio to capture long-term
+structure and the discrete codes produced by a neural audio codec
+to achieve high-quality synthesis. By training on large corpora of
+raw audio waveforms, AudioLM learns to generate natural and co-
+herent continuations given short prompts. When trained on speech,
+and without any transcript or annotation, AudioLM generates
+syntactically and semantically plausible speech continuations while
+also maintaining speaker identity and prosody for unseen speakers.
+Furthermore, we demonstrate how our approach extends beyond
+speech by generating coherent piano music continuations, despite
+being trained without any symbolic representation of music.
+I. I NTRODUCTION
+AUDIO signals, be they speech, music or environmental
+sounds, involve multiple scales of abstractions. For
+instance, speech can be analyzed at a very local acoustic or
+phonetic level but also in terms of prosody, syntax, grammar,
+or semantics. Music also follows a long-term structure, while
+being composed of highly non-stationary acoustic signals.
+When it comes to audio synthesis, these multiple scales interact
+in such a way that achieving high audio quality while displaying
+high-level consistency remains a challenge, in particular in the
+absence of strong supervision.
+Recent audio synthesis models have achieved nearly veridical
+signal quality by leveraging methods such as autoregressive
+waveform modeling [1], [2], adversarial training [3]–[5]
+or diffusion [6], [7]. Yet, when not provided with strong
+conditioning (e.g., linguistic features, a MIDI sequence), even
+powerful models like WaveNet [1] generate unstructured audio,
+such as babbling speech. Language models, on the other hand,
+have demonstrated their ability to model high-level, long-term
+structure for different content types, and the consequent
+advances in text [8]–[10] and image generation [11], [12] have
+paved the way towards synthesis of natural audio that remains
+intelligible and consistent over time. An important step in that
+direction, coined as “textless NLP”, has been recently achieved
+for unconditioned speech generation [13], [14]. In particular,
+Lakhotia et al. [14] show that a Transformer [15] trained on
+discretized speech units can generate coherent speech without
+Google Researchrelying on textual annotations. Yet, the acoustic diversity
+and the quality remain limited: the model is trained on clean
+speech only and synthesis is restricted to a single speaker.
+In this work, we introduce AudioLM, a framework that
+enables high-quality audio generation with long-term coherent
+structure, as demonstrated by our experiments on both speech
+and piano music continuation. We achieve this objective by
+combining recent advances in adversarial neural audio com-
+pression [16], self-supervised representation learning [17] and
+language modeling [18]. Specifically, starting from raw audio
+waveforms, we first construct coarse semantic tokens from a
+model pre-trained with a self-supervised masked language mod-
+eling objective [19]. Autoregressive modeling of these tokens
+captures both local dependencies (e.g., phonetics in speech,
+local melody in piano music) and global long-term structure
+(e.g., language syntax and semantic content in speech; harmony
+and rhythm in piano music). However, these tokens lead to poor
+reconstruction. To overcome this limitation, in addition to se-
+mantic tokens, we rely on fine-level acoustic tokens produced by
+a SoundStream neural codec [16], which capture the details of
+the audio waveform and allow for high-quality synthesis. Train-
+ing a language model to generate both semantic and acoustic
+tokens leads simultaneously to high audio quality and long-term
+consistency. In summary, we make the following contributions:
+•We propose AudioLM, a framework for audio generation
+that combines semantic and acoustic tokens in a hierar-
+chical fashion to achieve long-term consistency and high
+quality.
+•We compare the semantic tokens extracted from a pre-
+trained w2v-BERT [17] and the acoustic tokens from
+SoundStream [16] on a speech dataset, and we show
+that they complement each other in terms of phonetic
+discriminability and reconstruction quality.
+•We demonstrate the ability of AudioLM to generate co-
+herent speech in terms of phonetics, syntax and semantics,
+without relying on textual annotations. Moreover, when
+conditioned on a prefix (or prompt ) of only 3seconds of
+speech from a speaker not seen during training, AudioLM
+produces consistent continuations while maintaining the
+original speaker voice, prosody and recording conditions
+(e.g., level of reverberation, background noise).
+•We show that AudioLM is also suited for music generation.
+When training on piano recordings, it generates convincing
+continuations that are coherent with the prompt in terms
+of melody, harmony, tone and rhythm.arXiv:2209.03143v2  [cs.SD]  26 Jul 2023
+
+Page 1:
+2
+•We acknowledge the potential risks associated with the
+use of generative models that enable speech continuation,
+and we mitigate these risks by training a classifier that
+can detect synthetic speech generated by AudioLM with
+very high accuracy.
+We encourage the reader to listen to the samples produced
+by AudioLM in the accompanying material.1
+II. R ELATED WORK
+High-fidelity neural audio synthesis. Recent years have seen
+tremendous progress in the quality of audio generated by neural
+networks, largely attributed to the introduction of objective
+functions that improve over simple waveform regression. In par-
+ticular, WaveNet [1] introduced an autoregressive classification
+approach to speech synthesis, with quality that significantly out-
+performed traditional concatenative and parametric approaches
+at the cost of slow inference. While WaveNet inspired more
+computationally efficient alternatives such as WaveRNN [2] or
+parallel WaveNet [20], a significant paradigm shift occurred
+with the introduction of adversarial audio generation [3],
+[4], [21], which enables high fidelity generation without any
+autoregressive component. Moreover, combining such high-
+quality synthesis systems with differentiable quantization [22]–
+[24], allows training end-to-end neural codecs [16], [25]–[27]
+by compressing activations in a bottleneck layer. AudioLM
+leverages the tokens produced by a SoundStream neural
+codec [16], not as intermediate representations for lossy
+reconstruction, but rather as targets for a sequence modeling
+task operating at a lower sampling rate, which can be decoded
+back to audio at the original sampling rate.
+Self-supervised learning of audio representations. While
+neural audio synthesis typically focuses on modeling fine
+details of the signal, most self-supervised learning approaches
+rather aim at discovering high-level representations that
+correlate with coarse, symbolic features (e.g., phonemes,
+musical notes, class labels). This is typically achieved by
+proposing proxy objectives that do not rely on any transcript
+or label, but rather exploit regularities in the structure of the
+audio signals. Among these approaches, contrastive training
+learns representations for which pairs of positive examples are
+closer to each other than negative pairs. Positive pairs can be,
+for example, two segments that are close temporally [28]–[30]
+or two augmented views of the same sequence [31].
+Another line of work, inspired by NLP systems pre-
+training [18], [19], has explored the discretization of audio
+signals into a finite vocabulary of tokens to serve as tar-
+gets for masked language modeling pre-training [19], i.e.
+predicting long contiguous spans of masked tokens from a
+wide context. The discretization strategy is critical to the
+downstream performance of such models. Popular quantization
+strategies include quantizing representations optimized for
+future time step prediction [32], starting from quantizing low-
+level audio features followed by iterations of quantization
+target refinement [33], and jointly learning the quantization
+along with the masked language model [17]. The discriminative
+nature of these contrastive and predictive objectives, as well
+1https://google-research.github.io/seanet/audiolm/examplesas the fact that they require exploiting long-term dependencies,
+allow learning representations that encode coarse, high-level
+information about the signal (e.g., phonemes and word identity
+when trained on speech [34]). These representations are thus
+particularly useful for discriminative downstream tasks such as
+speech recognition [33] or audio classification [30]. However,
+as they are not optimized to encode fine details of original audio
+signals, they are poorly invertible and thus not directly usable
+for synthesis. AudioLM avoids this limitation by leveraging
+these high-level representations as a conditioning signal that
+carries semantic information and guides the prediction of high-
+quality acoustic tokens.
+Generating natural signals with language models. Neural
+language models have demonstrated remarkable abilities for
+tasks as diverse as open-ended dialog modeling [35], code
+completion [36] or even solving integrals and differential
+equations [37]. The key underlying mechanism of the best
+of these models is self-attention [15], which is suitable for
+modeling rich and complex long-range dependencies but,
+in the standard form, has a computational cost that grows
+quadratically with the length of the input sequences. This cost
+is acceptable for sequences of up to 103tokens [38], however,
+it prevents modeling natural signals in their raw form (for
+example, modeling a 512×512 image at the pixel level).
+While several works have explored efficient alternatives to self-
+attention [39]–[41], another solution to this scaling problem
+is to work with mappings of the natural signals to a compact,
+discrete representation space. A common approach is to
+model the representations in this space with an autoregressive
+Transformer, whose predictions are then mapped back to the
+original signal space. This approach has been used to generate
+high-resolution images [11], [12], [42] and long videos [43].
+For audio, Jukebox [44] adopts a hierarchical approach to
+generate tokens at various temporal resolutions which are then
+combined to reconstruct music. Another notable line of work
+is “textless NLP” [13], [14], [45], [46], which models language
+directly in the speech domain, without any transcription, by
+training autoregressive generative models of low-bitrate audio
+tokens [28], [33]. While Jukebox and GSLM [14] show high
+temporal coherence (e.g., spoken language generated by GSLM
+is meaningful), their audio quality remains limited: the music
+generated by Jukebox displays significant artifacts, while the
+speech sampled from GSLM is limited to a single speaker
+in a clean setting. This is unlike Perceiver AR [41], which
+trains an autoregressive model on the discrete codes of a high-
+bitrate SoundStream [16] codec. The model can then generate
+piano music of high signal-level quality; however the temporal
+structure of the generated sequences can be further improved.
+AudioLM tackles both challenges of long-term coherence and
+high-quality by combining semantic and acoustic tokens in a
+generative framework. This leads to improvements over GSLM
+by generating speech continuations that preserve the original
+speaker’s identity and intonation, as well as extending audio
+continuation beyond speech by generating piano sequences
+with high-level coherence.
+

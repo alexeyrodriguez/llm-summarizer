@@ -1,0 +1,56 @@
+
+Please consider the details for neural network training provided in the context below
+and provide an overall summary for the training procedure and hyperparameters.
+
+
+Context:
+Page 0:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 1:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 2:
+The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+
+Page 3:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 4:
+The paper provides information on how the neural network was trained for conditional codec language modeling. The training involves two conditional language models in a hierarchical manner, with an autoregressive (AR) decoder-only language model for the first quantizer and a non-autoregressive (NAR) language model for the second to the last quantizers. The AR model is conditioned on the phoneme sequence and the acoustic prompt, while the NAR model uses the acoustic prompt matrix to constrain speaker identity.
+
+Page 5:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 6:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 7:
+The models are trained using 16 NVIDIA TESLA V100 32GB GPUs with a batch size of 6k acoustic tokens per GPU for 800k steps. We optimize the models with the AdamW optimizer, warm up the learning rate for the first 32k updates to a peak of 5×10−4, and then linear decay it.
+
+Page 8:
+The text related to how the neural network was trained is as follows:
+
+"In this section, we perform detailed ablation experiments. We first study the NAR model. We train three NAR models with different numbers of prompts. The setting NAR-no prompt is trained without any prompts. The setting NAR-phn prompt is trained with only phoneme sequence as prompt and the setting NAR-2 prompts uses both phoneme prompt and acoustic token prompt as conditions."
+
+Page 9:
+The text related to how the neural network was trained is not present in the provided context.
+
+Page 10:
+The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+
+Page 11:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 12:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 13:
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 14:
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+
+Page 15:
+The provided text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+

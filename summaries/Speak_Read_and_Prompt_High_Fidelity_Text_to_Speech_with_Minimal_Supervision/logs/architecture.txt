@@ -1,0 +1,64 @@
+
+Please consider the neural network details provided in the context below
+and provide an overall summary for it.
+
+
+Context:
+Page 0:
+The neural network architecture in the paper involves splitting the TTS task into two sub-tasks: translating text to semantic tokens and translating semantic tokens to acoustic tokens. This approach allows for decoupling the supervision needed for each task, enabling training of the "speaking" component using self-supervised audio models and abundant unlabeled speech data.
+
+Page 1:
+The neural network architecture used in the paper is based on a seq2seq model, specifically leveraging standard Transformer models like BART/T5-style pretraining and backtranslation to reduce the need for supervision in training SPEAR-TTS.
+
+Page 2:
+The neural network architecture described in the paper is a two-stage model called SPEAR-TTS. The first stage, S1, maps tokenized text into semantic tokens using Transformer architectures. The second stage, S2, maps semantic tokens to acoustic tokens for speech synthesis.
+
+Page 3:
+The neural network architecture involves a large speech-only dataset for pretraining, utilizing an encoder-decoder model for backtranslation and fine-tuning. The model leverages semantic token representations to reduce computational complexity and facilitate training in both forward and backward directions. The process includes freezing the encoder, finetuning the decoder, and controlling the generation process with a second stage model mapping semantic tokens to acoustic tokens.
+
+Page 4:
+The neural network architecture described in the paper involves prompted generation, where semantic and acoustic tokens are concatenated in a specific order during training to generate target acoustic tokens. The model learns to preserve speaker identity and voice conditions from the prompt tokens. At inference time, the model generates acoustic tokens autoregressively based on the input tokens. A special separator token is used to prevent boundary artifacts.
+
+Page 5:
+The neural network architecture used in the paper is not explicitly mentioned in the provided context.
+
+Page 6:
+The neural network architecture used in the paper is T5-Large, which is a 24 layer encoder-decoder seq2seq model.
+
+Page 7:
+The neural network architecture for the second stage (S2) consists of a 12-layer decoder-only Transformer model with specific configurations: each layer has 12 heads with dimensionality 64, embedding dimensionality of 768, and FFN size of 2048.
+
+Page 8:
+The neural network architecture information is not explicitly provided in the context extracted from the machine learning paper.
+
+Page 9:
+The neural network architecture used in the paper is not explicitly mentioned in the provided context.
+
+Page 10:
+The neural network architecture used in the paper is not explicitly mentioned in the provided context.
+
+Page 11:
+Neural network architecture information is not explicitly mentioned in the provided context.
+
+Page 12:
+The neural codec used to produce acoustic tokens can be changed to improve the quality of SPEAR-TTS.
+
+Page 13:
+The provided context does not contain specific information related to neural network architecture.
+
+Page 14:
+I'm sorry, but the provided context does not contain information related to neural network architecture. If you have any other specific requests or questions, please let me know.
+
+Page 15:
+The neural network architecture used in the paper involves training a T5-small encoder-decoder model for the bandwidth extension task, mapping tokens from a 16 kHz codec to a 24 kHz codec. Additionally, the paper experiments with encoder-decoder models and T5-Large-sized architectures for training S1 on LibriTTS, with the number of layers in the encoder and decoder set to be equal.
+
+Page 16:
+Architecture details
+We report parameters for the Transformer layers we used in Table 9.
+
+Page 17:
+The neural network architecture information was not explicitly mentioned in the provided context.
+
+Page 18:
+I'm sorry, but the context provided does not contain information related to neural network architecture.
+

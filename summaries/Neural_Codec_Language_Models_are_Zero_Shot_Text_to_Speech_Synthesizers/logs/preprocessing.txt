@@ -1,0 +1,56 @@
+
+Please consider the data preprocessing details for training provided in the context below
+and provide an overall summary for the preprocessing.
+
+
+Context:
+Page 0:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 1:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 2:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 3:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 4:
+The data preprocessing for training involved using a pre-trained neural audio codec model, EnCodec, which encodes audio samples into discrete acoustic codes. The model utilizes residual vector quantization with a specific configuration of quantizers based on bitrate settings to generate real-valued embeddings for waveform reconstruction at 24 kHz.
+
+Page 5:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 6:
+The paper does not contain specific information related to how the data was preprocessed for training.
+
+Page 7:
+The text related to how the data was preprocessed for training is as follows:
+
+"During training, we randomly crop the waveform to a random length between 10 seconds and 20 seconds. Its corresponding phoneme alignments are used as the phoneme prompt. We remove the consecutive repetitions in the force-aligned phoneme sequence. For the NAR acoustic prompt tokens, we select a random segment waveform of 3 seconds from the same utterance."
+
+Page 8:
+The paper discusses the preprocessing of data for training the NAR model, where different prompts are used to improve performance. The NAR-no prompt setting is trained without any prompts, NAR-phn prompt uses only phoneme sequences as prompts, and NAR-2 prompts utilizes both phoneme and acoustic token prompts. The addition of prompts significantly impacts the model's performance in terms of WER and speaker similarity scores.
+
+Page 9:
+The paper does not provide specific information on how the data was preprocessed for training.
+
+Page 10:
+I'm sorry, but the context provided does not contain information related to how the data was preprocessed for training.
+
+Page 11:
+The paper mentions that VALL-E was pre-trained with 60K hours of speech data.
+
+Page 12:
+The paper does not provide specific information related to how the data was preprocessed for training.
+
+Page 13:
+I'm sorry, but the context provided does not contain information related to how the data was preprocessed for training.
+
+Page 14:
+I'm sorry, but the context provided does not contain specific information related to how the data was preprocessed for training in the machine learning papers mentioned.
+
+Page 15:
+I'm sorry, but the provided context does not contain information related to how the data was preprocessed for training.
+

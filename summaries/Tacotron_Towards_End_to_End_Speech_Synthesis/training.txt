@@ -1,9 +1,22 @@
 Summary of Neural Network Training Procedure and Hyperparameters:
 
-- The neural network was trained using a batch size of 32.
-- An Adam optimizer was used with a learning rate that started at 0.001 and decayed to 0.0005, 0.0003, and 0.0001 after specific global steps.
-- The training process employed a simple ℓ1 loss for both the seq2seq decoder and post-processing net, with equal weights assigned to the two losses.
-- The model architecture included a vanilla seq2seq model with 2 layers of residual RNNs, each layer having 256 GRU cells.
-- Scheduled sampling with a sampling rate of 0.5 was utilized to help the model learn alignments and generalize.
-- The decoder used a content-based tanh attention mechanism, with the target set as an 80-band mel-scale spectrogram.
-- Multiple, non-overlapping output frames were predicted at each decoder step to enhance convergence speed.
+The neural network training procedure and hyperparameters used in the context provided are as follows:
+
+1. Network Architecture:
+   - Various components including character embedding, encoder CBHG Conv1D bank, bidirectional GRU, decoder RNN, attention RNN, and post-processing net were utilized.
+   - Specific details such as layer sizes, types of activations, and network configurations were provided.
+
+2. Hyperparameters:
+   - Spectral analysis pre-emphasis: 0.97
+   - Frame length: 50 ms
+   - Frame shift: 12.5 ms
+   - Window type: Hann
+   - Character embedding size: 256-D
+   - Batch size: 32
+   - Learning rate decay: started from 0.001 and reduced to 0.0005, 0.0003, and 0.0001 at different global steps
+   - Loss function: simple ℓ1 loss for both seq2seq decoder and post-processing net
+   - Scheduled sampling with a rate of 0.5 was used for learning alignments and generalization
+   - Training with all sequences padded to a maximum length
+   - Not using loss mask on zero-padded frames to avoid repeated sounds towards the end of the output
+
+Overall, the neural network was trained using a specific architecture with defined hyperparameters including batch size, learning rate decay schedule, loss function, and training techniques like scheduled sampling. The training focused on optimizing the network for sequence-to-sequence tasks with attention mechanisms and post-processing steps.
