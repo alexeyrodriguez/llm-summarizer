@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from openai import OpenAI
+from typing import Optional
 
 @dataclass
 class SummarySpec:
-    extract_prompt: str # Prompt to run on each page of a paper, set to None to not perform an extraction
+    extract_prompt: Optional[str] # Prompt to run on each page of a paper, set to None to not perform an extraction
     summary_prompt: str # Prompt to run on the extracted content of each page
     fname: str
-    max_pages: int = None
+    max_pages: Optional[int] = None
 
 class OpenAIClient:
     def __init__(self):
