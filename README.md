@@ -8,3 +8,7 @@ for each aspect, first the relevant information is extracted from each page of t
 this collected information is used to make an overall summmary.
 
 The generated summaries for a few selected Text to Speech papers are in the summaries directory.
+
+## Creating summaries
+
+The entry point script for creating summaries is `summarize_literature.py`. Make sure to set your `OPENAI_API_KEY`.
