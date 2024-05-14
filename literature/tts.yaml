@@ -1,0 +1,7 @@
+arxiv_ids:
+ - "1703.10135" # Tacotron
+ - "1712.05884" # Tacotron 2
+ - "2301.02111" # VALL-E
+ - "2209.03143" # AudioLM
+ - "2305.09636" # SoundStorm
+ - "2302.03540" # SpearTTS
