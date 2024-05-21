@@ -1,22 +1,33 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+### Neural Network Training Details:
 
-The neural network training procedure and hyperparameters used in the context provided are as follows:
+- **Model Architecture**:
+  - Encoder CBHG Conv1D bank: K=16, conv-k-128-ReLU
+  - Decoder RNN: 2-layer residual GRU (256 cells)
+  - Attention RNN: 1-layer GRU (256 cells)
+  - Post-processing net Conv1D bank: K=8, conv-k-128-ReLU
+  - Bidirectional GRU: 128 cells
+  - Reduction factor (r): 2
 
-1. Network Architecture:
-   - Various components including character embedding, encoder CBHG Conv1D bank, bidirectional GRU, decoder RNN, attention RNN, and post-processing net were utilized.
-   - Specific details such as layer sizes, types of activations, and network configurations were provided.
+- **Hyper-parameters**:
+  - Spectral analysis pre-emphasis: 0.97
+  - Frame length: 50 ms
+  - Frame shift: 12.5 ms
+  - Window type: Hann
+  - Character embedding: 256-D
+  - Highway net: 4 layers of FC-128-ReLU
+  - Encoder pre-net: FC-256-ReLU → Dropout(0.5) → FC-128-ReLU → Dropout(0.5)
+  - Decoder pre-net: FC-256-ReLU → Dropout(0.5) → FC-128-ReLU → Dropout(0.5)
 
-2. Hyperparameters:
-   - Spectral analysis pre-emphasis: 0.97
-   - Frame length: 50 ms
-   - Frame shift: 12.5 ms
-   - Window type: Hann
-   - Character embedding size: 256-D
-   - Batch size: 32
-   - Learning rate decay: started from 0.001 and reduced to 0.0005, 0.0003, and 0.0001 at different global steps
-   - Loss function: simple ℓ1 loss for both seq2seq decoder and post-processing net
-   - Scheduled sampling with a rate of 0.5 was used for learning alignments and generalization
-   - Training with all sequences padded to a maximum length
-   - Not using loss mask on zero-padded frames to avoid repeated sounds towards the end of the output
+- **Training Details**:
+  - Loss Function: Simple ℓ1 loss for both seq2seq decoder and post-processing net
+  - Optimizer: Adam with learning rate decay
+  - Learning Rate Schedule: Starts from 0.001, decreases to 0.0005, 0.0003, and 0.0001
+  - Batch Size: 32
+  - Training Strategy: Scheduled sampling with a rate of 0.5
+  - Global Steps for Learning Rate Decay: 500K, 1M, and 2M
 
-Overall, the neural network was trained using a specific architecture with defined hyperparameters including batch size, learning rate decay schedule, loss function, and training techniques like scheduled sampling. The training focused on optimizing the network for sequence-to-sequence tasks with attention mechanisms and post-processing steps.
+- **Additional Information**:
+  - Target for seq2seq decoding: 80-band mel-scale spectrogram
+  - Trick for faster convergence: Predicting multiple, non-overlapping output frames at each decoder step
+
+This summary consolidates the key details related to the neural network training process for the Tacotron model presented in the paper "TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS."

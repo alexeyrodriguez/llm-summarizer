@@ -1,35 +1,37 @@
 
 Please consider the details for neural network training provided in the context below
-and provide an overall summary for the training procedure and hyperparameters.
+and collect them into a format that is easy to read and understand.
 
 
 Context:
 Page 0:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 1:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 2:
-The paper provides information on the training process, including the masking scheme and the masking procedure during training. The masking scheme involves randomly sampling a timestep and a RVQ level for training. The conditioning tokens are never masked, and the masking is designed to enable voice prompting.
+The text related to how the neural network was trained in the paper is as follows:
+
+"For designing our masking and decoding, we extend the masking and confidence-based parallel decoding scheme of MaskGIT (Chang et al., 2022) to token sequences produced by RVQ. At a high level, our approach can be seen as following the strategy of Chang et al. (2022) per RVQ level in a coarse-to-fine order. The coarse-to-fine ordering is of particular importance, since it not only respects the conditional dependencies between levels of the RVQ hierarchy, but also exploits the conditional independence of tokens from finer levels given all tokens from coarser levels. The tokens of finer levels are responsible for local, fine acoustic details and can thus be sampled in parallel without a loss of audio quality. We design our masking scheme for training accordingly. To enable voice prompting, we randomly sample a timestep t∈{1,...,T}, where T denotes the maximum sequence length, and we do not mask any tokens before this timestep. The conditioning tokens are never masked. Let Y∈{1,...,C}T×Q denote the SoundStream tokens, where C indicates the codebook size used in each RVQ level out of the Q levels. Our masking scheme proceeds as follows: Sample the prompt delimiter timestep t∼U{ 0,T−1}; Sample the current RVQ level q∼U{ 1,Q}."
 
 Page 3:
-The text related to how the neural network was trained is as follows:
+The paper provides information on the model training and inference setup as follows:
 
 "We train the model on LibriLight (Kahn et al., 2020) (60k hours), with 10 epochs over the data, sampling random windows of length between 0 and 30 seconds from each example."
 
 Page 4:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. The focus of the paper is on comparing the performance of SoundStorm, an audio generation system, with AudioLM's acoustic generator in terms of speech intelligibility, audio quality, voice preservation, and acoustic consistency. The evaluation is based on metrics such as Word Error Rate (WER), Character Error Rate (CER), voice preservation, and acoustic consistency across different audio sample lengths.
 
 Page 5:
-The paper provides information on the training of the neural network used in the study. Specifically, it mentions the training of a ByT5-large Transformer model for text-to-semantic token mapping. The model has 1.2B parameters, with 36 encoder and 12 decoder layers, embedding size of 1536, and feed-forward dimension of 3840. The training only involves the decoder, and a text-pretrained encoder from a published ByT5 checkpoint is used. The model takes a byte-level representation of the text as input and predicts non-deduplicated semantic tokens. Decoding is performed by temperature sampling with a temperature of 0.9 and top-k set to 125.
+The paper provides information on the training process of the models used in the study. Specifically, it mentions the training of a SoundStream codec operating at 24 kHz, producing 50 frames per second with 12 RVQ on a corpus of dialogues segmented into 30-second chunks. Additionally, it describes the training of a ByT5-large Transformer model for text-to-semantic token mapping, which has 1.2B parameters and uses temperature sampling with a temperature of 0.9 and top-k set to 125 during decoding.
 
 Page 6:
-The paper mentions the training details as follows: "We train both the text-to-semantic model and SoundStorm on the dialogue corpus for 10 epochs."
+The paper provides information on how the neural network was trained for the SoundStorm model. It states, "We train both the text-to-semantic model and SoundStorm on the dialogue corpus for 10 epochs." This indicates that the training process involved training the models on a dialogue corpus for a specific number of epochs.
 
 Page 7:
-The text does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know.
 
 Page 8:
-I'm sorry, but the context you provided does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses. If you have any other specific questions or requests, please let me know.
+I'm sorry, but the provided context does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, and losses. If you have any other specific questions or requests, please let me know.
 

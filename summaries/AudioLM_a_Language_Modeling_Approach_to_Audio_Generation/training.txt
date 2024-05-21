@@ -1,11 +1,9 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+Neural Network Training Details:
 
-1. Training Objective: The neural network is trained on large corpora of raw audio waveforms to generate natural and coherent continuations given short prompts. It aims to generate syntactically and semantically plausible speech continuations while maintaining speaker identity and prosody for unseen speakers.
-
-2. Batch Size: The neural network was trained with a batch size of 256 for 1 million steps.
-
-3. Training Data: For speaker classification, a convolutional network is trained on the union of LibriSpeech train-clean-100 and test-clean datasets, with 291 speakers in total. The dataset is split randomly, with 90% used for training and 10% for evaluation.
-
-4. Performance: The classifier achieves almost perfect accuracy on the evaluation split of the dataset.
-
-Overall, the training procedure involves training on raw audio waveforms with a specific batch size, and for speaker classification, a convolutional network is utilized with a particular dataset split for training and evaluation. The specific hyperparameters like learning rate, number of epochs, and losses are not provided in the context.
+- Training involved random cropping to equivalent input lengths of 30, 10, and 3 seconds for the three stages.
+- Consecutive repetitions of semantic tokens were removed in the first two stages.
+- Each stage was trained on 16 TPUv4s with a batch size of 256 for 1M steps.
+- The model achieved 98.6% accuracy on a balanced evaluation set.
+- Hyperparameters were identical to the speech continuation setup, except for the acoustic generation stage.
+- The acoustic generation stage used a codec with 3 layers of quantization and a codebook size of 214 per layer.
+- Experiments on piano continuation ignored the third stage and directly predicted the 3 levels of acoustic tokens in the second stage.

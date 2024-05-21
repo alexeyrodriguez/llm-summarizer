@@ -1,81 +1,105 @@
 
 Please consider the details for neural network training provided in the context below
-and provide an overall summary for the training procedure and hyperparameters.
+and collect them into a format that is easy to read and understand.
 
 
 Context:
 Page 0:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 1:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. The focus of the paper is on the methodology and approach used in building the TTS system, particularly emphasizing the use of pretraining, backtranslation, and self-supervised audio representations to achieve high-quality speech synthesis.
 
 Page 2:
-The paper provides details on how the neural network was trained, including pretraining methods such as denoising pretext task and backtranslation. The training process involves freezing upper layers of the encoder and fine-tuning lower layers for the S1 task. The exact number of layers to tune is a hyperparameter.
+The paper provides information on how the neural network was trained for the SPEAR-TTS system. The training process involves two stages: the first stage (S1) focuses on mapping tokenized text into semantic tokens, while the second stage (S2) maps semantic tokens to acoustic tokens. The paper mentions that the second stage (S2) can be trained using audio-only data, which is beneficial due to the larger scale of available audio-only data compared to parallel data.
+
+Additionally, the paper discusses approaches used to train the Transformer seq2seq models for the first stage (S1) of the system. It mentions pretraining the encoder-decoder Transformer on a denoising pretext task, where the model is provided with a corrupted version of an original semantic token sequence and tasked with producing the corresponding uncorrupted token sequence. The paper also discusses backtranslation as a method to generate synthetic parallel data from an audio-only corpus to train the speech-to-text model.
+
+The training process involves pretraining the model on the denoising task and then fine-tuning it for the S1 task by freezing upper layers of the encoder and updating lower layers based on a hyperparameter-defined number of layers to tune.
 
 Page 3:
-The paper describes the training process of the neural network as follows:
-
-"We start with pretraining an encoder-decoder model on a denoising task, using a semantic-token representation of speech-only data. Next, we finetune its decoder to backtranslate using a small parallel dataset. Then, we use this model to transcribe the speech-only dataset and obtain a synthetic parallel dataset. In turn, this synthetic dataset is used to finetune the encoder for 'translation' in the forward direction, along with the original small parallel dataset."
+The paper provides details on the training process of the neural network, including pretraining and backtranslation. The training process involves pretraining an encoder-decoder model on a denoising task using a semantic-token representation of speech-only data. The decoder is then finetuned to backtranslate semantic tokens to transcripts using a small parallel dataset. This model is then used to transcribe speech-only data and generate a synthetic parallel dataset. The synthetic dataset is further used to finetune the encoder for translation in the forward direction. Additionally, the paper mentions freezing the encoder and only finetuning the decoder for backtranslation model training. The process involves using synthetically generated parallel data to train the first stage of the text-to-speech (TTS) system, followed by finetuning on the original parallel data.
 
 Page 4:
-The paper provides details on how the neural network was trained, including the use of LibriLight dataset for training the self-supervised representation models, training S1 on the LJSpeech dataset, and the random selection of subsets of data for training in low-resource scenarios.
+The paper provides details on how the neural network was trained, including the process during training and the experimental setup. During training, the model randomly selects two non-overlapping windows of speech from each training example to compute sequences of semantic and acoustic tokens. One window is considered the prompt, and the other is the target output. The sequences are concatenated in the order of semantic tokens from the prompt, semantic tokens from the target, acoustic tokens from the prompt, and acoustic tokens from the target. The model learns to generate the target acoustic tokens while preserving the speaker identity captured by the acoustic tokens from the prompt. 
+
+At inference time, the model is provided with the input sequences (semantic and acoustic tokens) and generates the target acoustic tokens autoregressively. A special separator token is added at each segment boundary to prevent boundary artifacts. The paper also discusses controlling the noise level in the synthesized speech at inference time, including selecting cleaner prompts and using stochastic sampling with a no-reference audio quality metric.
+
+In terms of the experimental setup, the paper mentions using LibriLight for training the self-supervised representation models and k-means for discretizing embeddings into semantic tokens. The first stage of training, S1, is conducted on the LJSpeech dataset, which is a single-speaker dataset containing 24 hours of parallel data. The paper also describes how subsets of different sizes are sampled from the training set to simulate scenarios with limited data availability.
 
 Page 5:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The context does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 6:
-The hyperparameters and training details extracted from the paper are as follows:
+The hyperparameters and training details extracted from the machine learning paper are as follows:
 
-- Optimizer: Adafactor
-- Learning rate decay: Square-root
-- Regularization method: Label smoothing with a smoothing parameter of 0.1
-- Probability of deleting individual tokens during pretraining: 0.6
-- Dropout probability: 0.5
-- Batch size: 256
-- Pretraining updates: 1 million
-- Architecture: T5-Large
-- Number of layers in T5-Large: 24
+- For pretraining:
+  - Probability of deleting individual tokens: 0.6
+  - Label smoothing parameter: 0.1
+  - Dropout probability: 0.5
+  - Batch size: 256
+  - Number of updates for pretraining: 1 million
+  - Architecture used: T5-Large (24 layer encoder-decoder seq2seq model)
+
+- For finetuning:
+  - Dropout rate grid search: {0.1, 0.3, 0.5}
+  - Number of layers to finetune grid search: {4, 6, 8}
+  - Number of encoder's lower layers to finetune for synthetic parallel data: {4, 6, 8, 10, 12, 24}
+  - Number of layers to finetune for backtranslation: N∈{2,3,4,12}
+
+- Training from scratch:
+  - Dropout probability grid search: {0.1, 0.3, 0.5}
+  - Architecture size grid search: T5-small or T5-base
+  - Number of layers grid search: T5-small: {2, 4, 6, 8}; T5-base: {4, 6, 8, 12}
 
 Page 7:
-The text related to how the neural network was trained is as follows:
-
-"When evaluating SPEAR-TTS, we consider the following training settings for S1: (a) training from scratch using parallel data; (b) finetuning the pretrained checkpoint P using parallel data; (c) finetuning the pretrained checkpoint P to obtain the backtranslation model and then training the forward model from scratch on the synthetically generated data; (d) same as (c), but both the backward and the forward models are obtained by finetuning P with an additional finetuning of the forward model on the original parallel data."
+The information related to how the neural network was trained in the context extracted from the machine learning paper includes details about training settings for S1, such as training from scratch using parallel data, finetuning the pretrained checkpoint P using parallel data, finetuning the pretrained checkpoint P to obtain the backtranslation model and then training the forward model from scratch on the synthetically generated data, and finetuning both the backward and forward models obtained by finetuning P with an additional finetuning of the forward model on the original parallel data. The paper also mentions the main results in terms of Character Error Rate (CER) for different training scenarios and amounts of parallel data available, showing the impact of pretraining and backtranslation on the CER.
 
 Page 8:
-The text related to how the neural network was trained is not present in the provided context.
+The text related to how the neural network was trained is not explicitly mentioned in the provided context from the machine learning paper.
 
 Page 9:
-The text related to how the neural network was trained is as follows:
+The text related to how the neural network was trained in the machine learning paper is as follows:
 
-"TheS1model is trained on 15 min of parallel data."
+"Ultimately, we resort to subjective tests with human raters to compare the quality of SPEAR-TTS with the baselines and with ground-truth natural speech. We focus on the scenario with minimal supervision and use the S1 model that is trained with the 15 minute LJSpeech subset. As baselines, we use the FastSpeech2-LR models trained on 15 minutes, 1 hour, and 24 hour subsets of LJSpeech."
 
 Page 10:
-The text related to how the neural network was trained is not present in the provided context.
+The text related to how the neural network was trained is not present in the provided context from the machine learning paper.
 
 Page 11:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 12:
-The text related to how the neural network was trained is not present in the provided context.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 13:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific requests or questions, please let me know.
 
 Page 14:
-The provided context does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know and I'll do my best to assist you.
 
 Page 15:
-The text related to how the neural network was trained in the paper is as follows:
+The text related to how the neural network was trained in the machine learning paper is as follows:
 
-"We train the latter on LibriTTS (Zen et al., 2019) with 4 residual vector quantizer layers, a codebook size of 1024 per layer and 50 Hz embedding rate, resulting in a 2000 bit/s codec."
+"In this Section, we study intelligibility of SPEAR-TTS with S1 trained on LibriTTS. We generally use the same hyperparameter grids as in experiments with LJSpeech (Ito and Johnson, 2017) that are reported in Section 7. However, as LibriTTS is larger than LJSpeech, we also experiment with encoder-decoder models. For the largest training subset of LibriTTS (551h), we also experimented with T5-Large-sized encoder-decoder and decoder-only architectures (24 layers). For encoder-decoder models, we always set the numbers of layers in the encoder and the decoder to be equal."
 
 Page 16:
-The paper provides information on the architecture details of the Transformer layers used in the training of the neural network. The table in the paper reports details for T5-small, T5-base, and T5-large layers. The number of layers used is defined by a grid search.
+The text related to how the neural network was trained in the context is as follows:
+
+"Parallel training data
+24 h 12 h 3 h 2 h 1 h 30 min 15 min
+Phonemes 2.06 2.03 2.01 2.09 2.16 2.20 2.21
+Graphemes 1.79 1.79 2.13 2.27 2.46 2.71 3.45
+Table 10: CER (%) of SPEAR-TTS using a
+grapheme-based text representation. SPEAR-TTS
+is trained with pretraining and backtranslation, using
+15 minute subset of LJSpeech as parallel data."
 
 Page 17:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text related to how the neural network was trained in the provided context is as follows:
+
+"We measure how downsampling LibriLight (Kahn et al., 2020) before training affects the CER (%). Select the checkpoint with the highest validation accuracy. Next, we combine the selected checkpoints with S1 trained on LibriTTS (Zen et al., 2019) (with pretraining) and measure intelligibility of SPEAR-TTS on LibriSpeech dev-clean."
 
 Page 18:
-I'm sorry, but the context provided does not contain information related to how the neural network was trained (such as batch size, learning rate, number of epochs, losses).
+I'm sorry, but the context provided does not contain information related to how the neural network was trained (such as batch size, learning rate, number of epochs or steps, losses). If you have any other specific questions or requests, please let me know and I'll do my best to assist you.
 

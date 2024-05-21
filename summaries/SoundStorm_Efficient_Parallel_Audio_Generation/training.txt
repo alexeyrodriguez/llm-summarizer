@@ -1,13 +1,26 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+### Neural Network Training Details:
 
-1. Training Data: The neural network was trained on the LibriLight dataset for 60k hours, with random windows of length between 0 and 30 seconds sampled from each example.
+1. **Masking and Decoding Design**:
+   - Extends MaskGIT scheme to token sequences produced by RVQ.
+   - Follows a coarse-to-fine order per RVQ level.
+   - Masks tokens for training based on a specific scheme.
+   - Sampling of prompt delimiter timestep and RVQ level.
 
-2. Masking Scheme: The training process involved a masking scheme where a timestep and a RVQ level were randomly sampled for training. Conditioning tokens were not masked to enable voice prompting.
+2. **Model Training on LibriLight**:
+   - Dataset: LibriLight (60k hours).
+   - Training: 10 epochs.
+   - Data Processing: Random windows of length 0-30 seconds.
 
-3. Model Architecture: A ByT5-large Transformer model was trained for text-to-semantic token mapping. The model had 1.2B parameters, with 36 encoder and 12 decoder layers, embedding size of 1536, and feed-forward dimension of 3840. The training only involved the decoder, and a text-pretrained encoder from a published ByT5 checkpoint was used.
+3. **SoundStorm Model Training**:
+   - Trained on dialogue corpus for 10 epochs.
+   - Includes training of text-to-semantic model.
 
-4. Training Duration: The model was trained for 10 epochs on the LibriLight dataset and the dialogue corpus.
+4. **Model Specifics**:
+   - SoundStream codec: 24 kHz, 50 frames per second, 12 RVQ.
+   - ByT5-large Transformer: 1.2B parameters, temperature sampling (0.9), top-k (125).
 
-5. Decoding Strategy: Decoding was performed by temperature sampling with a temperature of 0.9 and top-k set to 125.
+5. **Evaluation Focus**:
+   - Comparison with AudioLM's acoustic generator.
+   - Metrics: WER, CER, voice preservation, acoustic consistency.
 
-Overall, the training procedure involved sampling random windows from the dataset, using a specific masking scheme, training for 10 epochs, and employing a specific decoding strategy. The hyperparameters included the model architecture details such as the number of parameters, layers, embedding size, and feed-forward dimension.
+Note: Batch size, learning rate, and specific losses are not provided in the context.

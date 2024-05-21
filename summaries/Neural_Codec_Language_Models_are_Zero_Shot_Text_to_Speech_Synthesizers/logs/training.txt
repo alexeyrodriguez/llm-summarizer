@@ -1,56 +1,62 @@
 
 Please consider the details for neural network training provided in the context below
-and provide an overall summary for the training procedure and hyperparameters.
+and collect them into a format that is easy to read and understand.
 
 
 Context:
 Page 0:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 1:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper provides information on how the neural network model, VALL-E, was trained. It states that VALL-E was trained with LibriLight, a corpus consisting of 60K hours of English speech with over 7000 unique speakers. The data used for training VALL-E is described as containing more noisy speech and inaccurate transcriptions but providing diverse speakers and prosodies. The authors believe that this approach is robust to noise and generalizes well by leveraging large data. It is highlighted that existing TTS systems are typically trained with much smaller datasets, with VALL-E's training data being over hundreds of times larger in comparison.
 
 Page 2:
-The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+The text does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 3:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know.
 
 Page 4:
-The paper provides information on how the neural network was trained for conditional codec language modeling. The training involves two conditional language models in a hierarchical manner, with an autoregressive (AR) decoder-only language model for the first quantizer and a non-autoregressive (NAR) language model for the second to the last quantizers. The AR model is conditioned on the phoneme sequence and the acoustic prompt, while the NAR model uses the acoustic prompt matrix to constrain speaker identity.
+The paper provides information on the training process for the neural speech codec model used in the study. The training involves a hierarchical structure of tokens with a residual quantization in the neural codec model. Tokens from previous quantizers capture acoustic properties like speaker identity, while consecutive quantizers learn fine acoustic details. Each quantizer is trained to model the residual from the previous quantizers. Two conditional language models are designed in a hierarchical manner for training.
+
+For the discrete tokens from the first quantizer c:,1, an autoregressive (AR) decoder-only language model is trained. It is conditioned on the phoneme sequence x and the acoustic prompt ˜C:,1. The training formulation is given as:
+
+p(c:,1|x,˜C:,1;θAR) = Πt=0Tp(ct,1|c<t,1,˜ c:,1,x;θAR)
+
+On the other hand, for the discrete tokens from the second to the last quantizers, c:,j∈[2,8], a non-autoregressive (NAR) language model is trained. In this case, the acoustic prompt matrix ˜C is used as an acoustic prompt to constrain the speaker identity during training.
 
 Page 5:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper discusses the Autoregressive Codec Language Modeling, where the autoregressive language model generates tokens from the first quantizer. It includes a phoneme embedding, an acoustic embedding, a transformer decoder, and a prediction layer. The model input is the concatenation of the phoneme sequence and the first codebook, with special <EOS> tokens appended after each. Sinuous position embedding is computed separately for prompt and input tokens. The model is optimized to maximize the probability of the next token in the first codebook. During training, any prefix sequence is treated as a prompt for the latter part of the sequence.
 
 Page 6:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text extracted from the paper does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. The provided context focuses on the architecture and operation of the neural network models used in the study, particularly the autoregressive (AR) and non-autoregressive (NAR) models, as well as the inference process and prompting strategies for in-context learning in text-to-speech (TTS) systems.
 
 Page 7:
 The models are trained using 16 NVIDIA TESLA V100 32GB GPUs with a batch size of 6k acoustic tokens per GPU for 800k steps. We optimize the models with the AdamW optimizer, warm up the learning rate for the first 32k updates to a peak of 5×10−4, and then linear decay it.
 
 Page 8:
-The text related to how the neural network was trained is as follows:
+The text related to how the neural network was trained in the context extracted from the machine learning paper is as follows:
 
-"In this section, we perform detailed ablation experiments. We first study the NAR model. We train three NAR models with different numbers of prompts. The setting NAR-no prompt is trained without any prompts. The setting NAR-phn prompt is trained with only phoneme sequence as prompt and the setting NAR-2 prompts uses both phoneme prompt and acoustic token prompt as conditions."
+"In this section, we perform detailed ablation experiments. We first study the NAR model. We train three NAR models with different numbers of prompts. The setting NAR-no prompt is trained without any prompts. The setting NAR-phn prompt is trained with only phoneme sequence as prompt and the setting NAR-2 prompts uses both phoneme prompt and acoustic token prompt as conditions. In evaluation, we use the ground-truth first-level acoustic tokens as the model input and compute the WER and speaker similarity scores."
 
 Page 9:
-The text related to how the neural network was trained is not present in the provided context.
+The provided text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 10:
-The text does not contain information related to how the neural network was trained (batch size, learning rate, number of epochs, losses).
+I'm sorry, but the context provided does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know.
 
 Page 11:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper discusses the training of VALL-E, a language model approach for Text-to-Speech (TTS) using audio codec codes as intermediate representations. The model was pre-trained with 60K hours of speech data and demonstrated in-context learning capability in zero-shot scenarios, achieving new state-of-the-art results on LibriSpeech and VCTK datasets. Despite the progress, the paper mentions several issues, including synthesis robustness, data coverage limitations, and model structure considerations for future work.
 
 Page 12:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 13:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific requests or questions, please let me know.
 
 Page 14:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know.
 
 Page 15:
-The provided text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or requests, please let me know.
 

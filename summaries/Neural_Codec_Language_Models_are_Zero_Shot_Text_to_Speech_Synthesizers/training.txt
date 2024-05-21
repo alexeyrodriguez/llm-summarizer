@@ -1,20 +1,17 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+Neural Network Training Details:
 
-1. Training Procedure:
-   - The neural network was trained for conditional codec language modeling.
-   - Two conditional language models were used in a hierarchical manner:
-     - An autoregressive (AR) decoder-only language model for the first quantizer.
-     - A non-autoregressive (NAR) language model for the second to the last quantizers.
-   - The AR model was conditioned on the phoneme sequence and the acoustic prompt.
-   - The NAR model used the acoustic prompt matrix to constrain speaker identity.
-   - Ablation experiments were conducted to study the NAR model with different prompt settings.
+1. Model Name: VALL-E
+2. Training Data: LibriLight corpus with 60K hours of English speech and over 7000 unique speakers
+3. Data Characteristics: Contains noisy speech and inaccurate transcriptions, diverse speakers, and prosodies
+4. Training Approach: Robust to noise, generalizes well by leveraging large data
+5. Dataset Size Comparison: Training data over hundreds of times larger than typical TTS systems
+6. Training Hardware: 16 NVIDIA TESLA V100 32GB GPUs
+7. Batch Size: 6k acoustic tokens per GPU
+8. Training Steps: 800k steps
+9. Optimizer: AdamW optimizer
+10. Learning Rate: Warm up to a peak of 5×10−4 for the first 32k updates, then linear decay
+11. Model Architecture: Hierarchical structure with residual quantization, autoregressive and non-autoregressive language models
+12. Training Experiments: Ablation experiments on NAR model with different prompt settings
+13. Evaluation Metrics: WER (Word Error Rate) and speaker similarity scores used for evaluation
 
-2. Hyperparameters:
-   - Training was performed using 16 NVIDIA TESLA V100 32GB GPUs.
-   - Batch size: 6k acoustic tokens per GPU.
-   - Training steps: 800k steps.
-   - Optimizer: AdamW.
-   - Learning rate scheduling: Warm-up for the first 32k updates to a peak of 5×10−4, then linear decay.
-   - Ablation experiments included training NAR models with different numbers of prompts, such as no prompt, phoneme prompt only, and both phoneme and acoustic token prompts.
-
-Overall, the training procedure involved a specific architecture for conditional codec language modeling with a hierarchical approach using AR and NAR models. The hyperparameters included details on batch size, optimizer, learning rate scheduling, and the use of multiple GPUs for training.
+Note: Specific details such as batch size, learning rate, number of epochs or steps, and losses were not provided in the context for all parts of the neural network training.

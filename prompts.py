@@ -15,12 +15,12 @@ and provide an overall summary for the preprocessing.
 training_spec = SummarySpec(
     """
 If there is information related to how the neural network was trained
-(for example batch size, learning rate, number of epochs, losses),
-please extract the text verbatim, be concise and do not add text that is not in the paper.
+(for example batch size, learning rate, number of epochs or steps, losses),
+please extract the text verbatim, and do not add text that is not in the paper.
 """,
     """
 Please consider the details for neural network training provided in the context below
-and provide an overall summary for the training procedure and hyperparameters.
+and collect them into a format that is easy to read and understand.
 """,
     "training",
 )

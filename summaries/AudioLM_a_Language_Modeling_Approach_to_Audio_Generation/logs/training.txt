@@ -1,43 +1,53 @@
 
 Please consider the details for neural network training provided in the context below
-and provide an overall summary for the training procedure and hyperparameters.
+and collect them into a format that is easy to read and understand.
 
 
 Context:
 Page 0:
-The paper provides information related to how the neural network was trained:
+The paper provides information related to how the neural network was trained. Here is the extracted text verbatim:
 
-- "By training on large corpora of raw audio waveforms, AudioLM learns to generate natural and coherent continuations given short prompts."
-- "When trained on speech, and without any transcript or annotation, AudioLM generates syntactically and semantically plausible speech continuations while also maintaining speaker identity and prosody for unseen speakers."
-- "Training a language model to generate both semantic and acoustic tokens leads simultaneously to high audio quality and long-term consistency."
+"•We propose AudioLM, a framework for audio generation
+that combines semantic and acoustic tokens in a hierar-
+chical fashion to achieve long-term consistency and high
+quality.
+•We compare the semantic tokens extracted from a pre-
+trained w2v-BERT [17] and the acoustic tokens from
+SoundStream [16] on a speech dataset, and we show
+that they complement each other in terms of phonetic
+discriminability and reconstruction quality."
 
 Page 1:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 2:
-The text does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 3:
-The text does not contain information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. The provided context focuses on the comparison of token types in terms of phonetic discriminability and reconstruction quality, as well as the hierarchical modeling of semantic and acoustic tokens within the AudioLM framework.
 
 Page 4:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 5:
-The neural network was trained with a batch size of 256 for 1 million steps.
+The neural network was trained using random cropping to equivalent input lengths of 30, 10, and 3 seconds for the three stages. The training involved removing consecutive repetitions of the semantic tokens in the first two stages. Each stage was trained on 16 TPUv4s with a batch size of 256 for 1M steps.
 
 Page 6:
-The paper provides information on the training of a convolutional network for speaker classification, including details on the architecture and training data used. The network is trained on the union of LibriSpeech train-clean-100 and test-clean datasets, with 291 speakers in total. The dataset is split randomly, with 90% used for training and 10% for evaluation. The classifier achieves almost perfect accuracy on the evaluation split of the dataset.
+The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 7:
-The text related to how the neural network was trained is not present in the provided context.
+The text related to how the neural network was trained in the paper is as follows:
+
+"Unlike AudioLM, the aforementioned models are not causal, so they are not well suited for speech generation. Hence, we also consider causal baselines. Firstly, we include a variant of GSLM that achieves the best sWUGGY and sBLIMP scores reported in Lakhotia et al. [14]. This model is a decoder-only Transformer language model trained using quantized HuBERT representations [33]. Next, we include the entry of van Niekerk et al. [62], obtaining the highest scores in the challenge among causal models with an LSTM model trained on CPC-based speech tokens."
 
 Page 8:
-The paper does not provide specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The text related to how the neural network was trained in the context extracted from the machine learning paper is as follows:
+
+"For training, we extract the original samples and prompts from LibriSpeech train-clean-100. We train on crops of 1 seconds, and compute predictions on longer sequences with the same approach as described in Section IV-D. On a balanced evaluation set, this model achieves 98.6% accuracy. The model hyperparameters are identical to the speech continuation setup, except for the acoustic generation stage: we found that a codec with 3 layers of quantization and a larger codebook size of 214 per layer already provides high reconstruction quality, so the experiments on piano continuation ignore the third stage and directly predict the 3 levels of acoustic tokens in the second stage."
 
 Page 9:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+The provided text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses.
 
 Page 10:
-The text does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs, or losses.
+I'm sorry, but the context provided does not contain specific information related to how the neural network was trained, such as batch size, learning rate, number of epochs or steps, or losses. If you have any other specific questions or need assistance with a different topic, please let me know.
 

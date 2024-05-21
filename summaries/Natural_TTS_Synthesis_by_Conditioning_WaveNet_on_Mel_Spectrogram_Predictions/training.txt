@@ -1,3 +1,17 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+Neural Network Training Details:
 
-The neural network in the study was trained using a batch size of 64 on a single GPU. The Adam optimizer was utilized with a learning rate that started at 10^-3 and exponentially decayed to 10^-5 after 50,000 iterations. L2 regularization with a weight of 10^-6 was applied to the model. The network architecture included an encoder and a decoder with attention, and regularization techniques like dropout and zoneout were employed on convolutional and LSTM layers. The training loss was minimized using the summed mean squared error (MSE), with experiments conducted on log-likelihood loss using a Mixture Density Network that did not yield improved results. Overall, the training procedure involved careful selection of hyperparameters, regularization techniques, and loss functions to optimize the neural network's performance.
+- Feature Prediction Network Training:
+  - Batch Size: 64
+  - Optimizer: Adam
+  - Initial Learning Rate: 10^-3
+  - Learning Rate Schedule: Exponential decay to 10^-5 after 50,000 iterations
+  - Regularization: L2 with weight 10^-6
+
+- Modified WaveNet Training:
+  - Batch Size: 128 (distributed across 32 GPUs)
+  - Optimizer: Adam
+  - Learning Rate: 10^-4
+  - Parameter Update: Exponentially-weighted moving average with decay of 0.9999
+  - Target Scaling: Waveform targets scaled by a factor of 127.5
+
+Note: The paper does not provide specific details on the number of epochs or steps, or losses used during training.

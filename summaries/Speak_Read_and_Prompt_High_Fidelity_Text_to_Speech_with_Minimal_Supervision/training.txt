@@ -1,23 +1,37 @@
-Summary of Neural Network Training Procedure and Hyperparameters:
+### Neural Network Training Details Summary:
 
-Training Procedure:
-- Pretraining an encoder-decoder model on a denoising task using a semantic-token representation of speech-only data.
-- Finetuning the decoder through backtranslation using a small parallel dataset.
-- Transcribing speech-only data to create a synthetic parallel dataset for further training.
-- Finetuning the encoder for translation using the synthetic dataset and original parallel data.
-- Training S1 on the LJSpeech dataset.
-- Training self-supervised representation models on the LibriLight dataset.
-- Random selection of subsets of data for training in low-resource scenarios.
+#### Pretraining:
+- **Probability of deleting individual tokens:** 0.6
+- **Label smoothing parameter:** 0.1
+- **Dropout probability:** 0.5
+- **Batch size:** 256
+- **Number of updates for pretraining:** 1 million
+- **Architecture used:** T5-Large (24 layer encoder-decoder seq2seq model)
 
-Hyperparameters:
-- Optimizer: Adafactor
-- Learning rate decay: Square-root
-- Regularization method: Label smoothing with a smoothing parameter of 0.1
-- Probability of deleting individual tokens during pretraining: 0.6
-- Dropout probability: 0.5
-- Batch size: 256
-- Pretraining updates: 1 million
-- Architecture: T5-Large
-- Number of layers in T5-Large: 24
+#### Finetuning:
+- **Dropout rate grid search:** {0.1, 0.3, 0.5}
+- **Number of layers to finetune grid search:** {4, 6, 8}
+- **Number of encoder's lower layers to finetune for synthetic parallel data:** {4, 6, 8, 10, 12, 24}
+- **Number of layers to finetune for backtranslation:** N∈{2,3,4,12}
 
-Overall, the training procedure involves a combination of pretraining, finetuning, and data synthesis techniques, while the hyperparameters include details on optimization, regularization, and model architecture.
+#### Training from Scratch:
+- **Dropout probability grid search:** {0.1, 0.3, 0.5}
+- **Architecture size grid search:** T5-small or T5-base
+- **Number of layers grid search:** T5-small: {2, 4, 6, 8}; T5-base: {4, 6, 8, 12}
+
+#### Training Process:
+- **Two-stage training:** S1 for mapping text to semantic tokens, S2 for mapping semantic to acoustic tokens
+- **Pretraining tasks:** Denoising pretext task for encoder-decoder Transformer
+- **Backtranslation:** Generating synthetic parallel data from audio-only corpus
+- **Model Training:** Using synthetic data for initial training, followed by finetuning on original parallel data
+- **Inference:** Autoregressive generation of target acoustic tokens with noise control
+
+#### Experimental Setup:
+- **Datasets:** LibriLight for self-supervised representation models, LJSpeech for training S1
+- **Sampling:** Subsets of different sizes from training set for limited data scenarios
+
+#### Results:
+- **Evaluation:** Character Error Rate (CER) for different training scenarios and data amounts
+- **Impact:** Pretraining and backtranslation on CER improvement
+
+This summary provides an overview of the neural network training details extracted from the provided context.

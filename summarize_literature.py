@@ -34,17 +34,18 @@ def load_papers():
     return papers
 
 def summarize_paper(client: OpenAIClient, summary_spec: SummarySpec, paper: Paper) -> None:
-    reader = pypdf.PdfReader(paper.filename)
-    pages = [p.extract_text() for p in reader.pages]
-    answer, summ_prompt = client.run_summary(summary_spec, pages)
-    os.makedirs(f"summaries/{paper.dirname}", exist_ok=True)
-    os.makedirs(f"summaries/{paper.dirname}/logs", exist_ok=True)
+    if not os.path.exists(f"summaries/{paper.dirname}/{summary_spec.fname}.txt"):
+        reader = pypdf.PdfReader(paper.filename)
+        pages = [p.extract_text() for p in reader.pages]
+        answer, summ_prompt = client.run_summary(summary_spec, pages)
+        os.makedirs(f"summaries/{paper.dirname}", exist_ok=True)
+        os.makedirs(f"summaries/{paper.dirname}/logs", exist_ok=True)
 
-    with open(f"summaries/{paper.dirname}/{summary_spec.fname}.txt", "w") as f:
-        f.write(answer)
+        with open(f"summaries/{paper.dirname}/{summary_spec.fname}.txt", "w") as f:
+            f.write(answer)
 
-    with open(f"summaries/{paper.dirname}/logs/{summary_spec.fname}.txt", "w") as f:
-        f.write(summ_prompt)
+        with open(f"summaries/{paper.dirname}/logs/{summary_spec.fname}.txt", "w") as f:
+            f.write(summ_prompt)
 
 
 client = OpenAIClient()
